@@ -8,13 +8,23 @@
     tools:layout_editor_absoluteY="81dp"
     tools:layout_editor_absoluteX="0dp">
 
+
     <ImageButton
         android:id="@+id/btnOption"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:onClick="onClick"
         app:srcCompat="@drawable/option"
-        tools:layout_editor_absoluteX="318dp"
-        tools:layout_editor_absoluteY="16dp" />
+        tools:layout_editor_absoluteX="227dp"
+        tools:layout_editor_absoluteY="82dp" />
+
+    <Button
+        android:id="@+id/btn_strory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Story"
+        tools:layout_editor_absoluteX="97dp"
+        tools:layout_editor_absoluteY="201dp" />
+
 
 </android.support.constraint.ConstraintLayout>
