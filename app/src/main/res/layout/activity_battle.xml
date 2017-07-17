@@ -4,20 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/activity_battle"
     tools:context="com.bbp.crashtower.BattleActivity">
-
-
 
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="344dp"
-        android:layout_height="551dp"
-        center
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_height="576dp"
         android:orientation="vertical"
-        android:weightSum="10">
+        android:weightSum="10"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_battle"
+        app:layout_constraintLeft_toLeftOf="@+id/activity_battle"
+        app:layout_constraintRight_toRightOf="@+id/activity_battle"
+        app:layout_constraintTop_toTopOf="@+id/activity_battle"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="wrap_content"
@@ -26,53 +26,57 @@
 
         </android.support.constraint.ConstraintLayout>
 
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <android.support.constraint.Guideline
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/guideline"
-                android:orientation="vertical"/>
-
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintLeft_toLeftOf="@+id/guideline"
-                android:text="Button1" />
+            android:layout_weight="1"
+            android:weightSum="5"
+            app:layout_constraintBottom_toBottomOf="@+id/activity_battle"
+            app:layout_constraintLeft_toLeftOf="@+id/activity_battle"
+            app:layout_constraintRight_toRightOf="@+id/activity_battle"
+            app:layout_constraintTop_toTopOf="@+id/activity_battle"
+            android:gravity="center">
 
             <Button
-                android:id="@+id/button2"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintRight_toRightOf="@+id/guideline"
-                android:text="Button2" />
-
-            <Button
-                android:id="@+id/button3"
+                android:id="@+id/btn_battle_card_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintRight_toRightOf="@+id/guideline"
-                android:text="Button3" />
+                android:text="Btn1"
+                android:layout_weight="1"
+                />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/btn_battle_card_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintRight_toRightOf="@+id/guideline"
-                android:text="Button4" />
+                android:text="Btn2"
+                android:layout_weight="1"
+                />
+
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/btn_battle_card_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintRight_toRightOf="@+id/guideline"
-                android:text="Button5" />
+                android:text="Btn3"
+                android:layout_weight="1"
+                />
 
+            <Button
+                android:id="@+id/btn_battle_card_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Btn4"
+                android:layout_weight="1"
+                />
+            <Button
+                android:id="@+id/btn_battle_card_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Btn5"
+                android:layout_weight="1"
+                />
 
-        </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
 
     </android.support.v7.widget.LinearLayoutCompat>
 
