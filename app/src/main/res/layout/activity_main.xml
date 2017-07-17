@@ -9,15 +9,6 @@
     tools:layout_editor_absoluteX="0dp">
 
 
-    <ImageButton
-        android:id="@+id/btnOption"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:onClick="onClick"
-        app:srcCompat="@drawable/option"
-        tools:layout_editor_absoluteX="227dp"
-        tools:layout_editor_absoluteY="82dp" />
-
     <Button
         android:id="@+id/btn_strory"
         android:layout_width="wrap_content"
