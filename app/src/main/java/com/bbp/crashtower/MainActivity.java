@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_strory).setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        Intent intent_battle = new Intent(getApplicationContext(),BattleActivity.class);
+                        Intent intent_battle = new Intent(getApplicationContext(),DragAndDropActivity.class);
                         startActivity(intent_battle);
                     }
                 }
