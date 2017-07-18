@@ -18,11 +18,10 @@ import com.bbp.crashtower.R;
  */
 
 
-
+    
 public class BattleView extends View{
 
     int width, height;
-    Resources res;
 
     //초기화 영역
     public BattleView(Context context){
@@ -31,11 +30,6 @@ public class BattleView extends View{
         width = display.getWidth();
         height = display.getHeight();
 
-
-        res = context.getResources();
-
-
-
     }
 
     // 그림그리는 영역
@@ -43,11 +37,6 @@ public class BattleView extends View{
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         Paint paint = new Paint();
-        paint.setColor(Color.BLACK);
-        paint.setTextSize(20);
-
-        canvas.drawText("해상도 = " + width + " x " + height, 100, 200, paint);
-
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.baba);
 
