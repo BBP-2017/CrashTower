@@ -24,7 +24,7 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.btn_strory).setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        Intent intent_battle = new Intent(getApplicationContext(),DragAndDropActivity.class);
+                        Intent intent_battle = new Intent(getApplicationContext(),BattleActivity.class);
                         startActivity(intent_battle);
                     }
                 }
