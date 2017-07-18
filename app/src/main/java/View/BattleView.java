@@ -9,10 +9,15 @@ import android.view.View;
  */
 
 public class BattleView extends View{
+
+    //초기화 영역
     public BattleView(Context context){
         super(context);
 
+
     }
+
+    // 그림그리는 영역
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
