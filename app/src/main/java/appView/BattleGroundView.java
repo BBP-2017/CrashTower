@@ -79,10 +79,10 @@ public class BattleGroundView extends View{
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(event.getAction() == MotionEvent.ACTION_DOWN){
-            x = (int) event.getX();
-            y = (int) event.getY();
+            //x = (int) event.getX();
+            //y = (int) event.getY();
         }
-        
+
         return super.onTouchEvent(event);
     }
 
