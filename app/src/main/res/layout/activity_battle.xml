@@ -17,7 +17,9 @@
         app:layout_constraintTop_toTopOf="@id/activity_battle"
         app:layout_constraintBottom_toBottomOf="@id/activity_battle"
         android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintVertical_bias="0.0">
 
         <android.support.v7.widget.FitWindowsFrameLayout
             android:layout_width="fill_parent"

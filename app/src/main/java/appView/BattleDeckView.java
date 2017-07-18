@@ -17,14 +17,10 @@ import com.bbp.crashtower.R;
 
 public class BattleDeckView extends View {
 
-    int diplayWidth, displayHeight;
-
     //초기화 영역
-    public BattleDeckView(Context context, int width, int height){
+    public BattleDeckView(Context context){
         super(context);
 
-        diplayWidth = width;
-        displayHeight = height;
     }
 
     // 그림그리는 영역

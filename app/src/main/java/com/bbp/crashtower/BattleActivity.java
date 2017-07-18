@@ -2,6 +2,7 @@ package com.bbp.crashtower;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -29,8 +30,8 @@ public class BattleActivity extends BaseActivity {
         frameGround =(FrameLayout)findViewById(R.id.frame_grooud);
         frameDeck =(FrameLayout)findViewById(R.id.frame_deck);
 
-        frameGround.addView(new appView.BattleGroundView(this,displayWidth,displayHeight));
-        frameDeck.addView(new appView.BattleDeckView(this,displayWidth,displayHeight));
+        frameGround.addView(new appView.BattleGroundView(this));
+        frameDeck.addView(new appView.BattleDeckView(this));
 
     }
 }

@@ -6,7 +6,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.bbp.crashtower.R;
 
@@ -18,29 +20,35 @@ import com.bbp.crashtower.R;
 
 public class BattleGroundView extends View{
 
-    int diplayWidth, displayHeight;
-    int pxWith, pxHeight;
+    int displayLeft, displayTop, displayRight, displayBottom;
+    int pxWidth, pxHeight;
 
     Bitmap backgroundBitmap, babaBitmap;
 
     Paint paint;
 
     //초기화 영역
-    public BattleGroundView(Context context, int width, int height){
+    public BattleGroundView(Context context){
         super(context);
 
         paint = new Paint();
 
-        diplayWidth = width;
-        displayHeight = height;
-
-        DisplayMetrics metrics = new DisplayMetrics();
-
-
         backgroundBitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.battle_ground);
-        backgroundBitmap = Bitmap.createScaledBitmap(backgroundBitmap, diplayWidth, displayHeight, true);
-
         babaBitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.baba);
+    }
+
+    // view가 layout에 적용됬을때 호출됨
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+
+        displayLeft = left;
+        displayRight = right;
+        displayTop = top;
+        displayBottom = bottom;
+
+        backgroundBitmap = Bitmap.createScaledBitmap(backgroundBitmap, displayRight, displayBottom, true);
+
     }
 
     // 그림그리는 영역
@@ -49,6 +57,6 @@ public class BattleGroundView extends View{
         super.onDraw(canvas);
 
         canvas.drawBitmap(backgroundBitmap, 0, 0,paint);
-        canvas.drawBitmap(babaBitmap,diplayWidth/2,displayHeight/2,paint);
+        canvas.drawBitmap(babaBitmap,displayRight/2,displayBottom/2,paint);
     }
 }
