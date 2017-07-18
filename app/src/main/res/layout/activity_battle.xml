@@ -11,31 +11,71 @@
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:weightSum="10"
+        android:weightSum="7"
         app:layout_constraintLeft_toLeftOf="@id/activity_battle"
         app:layout_constraintRight_toRightOf="@id/activity_battle"
         app:layout_constraintTop_toTopOf="@id/activity_battle"
         app:layout_constraintBottom_toBottomOf="@id/activity_battle"
         android:orientation="vertical"
         android:gravity="center"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="0.0">
+        >
 
         <android.support.v7.widget.FitWindowsFrameLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:id="@+id/frame_grooud"
-            android:layout_weight="9"
+            android:layout_weight="6"
             >
         </android.support.v7.widget.FitWindowsFrameLayout>
 
-        <android.support.v7.widget.FitWindowsFrameLayout
+        <android.support.v7.widget.LinearLayoutCompat
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:id="@+id/frame_deck"
+            android:id="@+id/linear_deck"
             android:layout_weight="1"
+            android:weightSum="5"
             >
-        </android.support.v7.widget.FitWindowsFrameLayout>
+            <android.support.v7.widget.AppCompatImageButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/card_background"
+                android:id="@+id/btn_battle_card_1"
+                />
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/card_background"
+                android:id="@+id/btn_battle_card_2"
+                />
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/card_background"
+                android:id="@+id/btn_battle_card_3"
+                />
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/card_background"
+                android:id="@+id/btn_battle_card_4"
+                />
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/card_background"
+                android:id="@+id/btn_battle_card_5"
+                />
+
+        </android.support.v7.widget.LinearLayoutCompat>
 
     </android.support.v7.widget.LinearLayoutCompat>
 

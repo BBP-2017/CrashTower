@@ -34,7 +34,6 @@ public class BattleGroundView extends View{
         paint = new Paint();
 
         backgroundBitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.battle_ground);
-        babaBitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.baba);
     }
 
     // view가 layout에 적용됬을때 호출됨
@@ -57,6 +56,5 @@ public class BattleGroundView extends View{
         super.onDraw(canvas);
 
         canvas.drawBitmap(backgroundBitmap, 0, 0,paint);
-        canvas.drawBitmap(babaBitmap,displayRight/2,displayBottom/2,paint);
     }
 }

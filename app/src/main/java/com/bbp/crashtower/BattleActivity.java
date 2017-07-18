@@ -7,10 +7,11 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 public class BattleActivity extends BaseActivity {
 
-    FrameLayout frameGround, frameDeck;
+    FrameLayout frameGround;
 
     int displayWidth, displayHeight;
 
@@ -28,10 +29,9 @@ public class BattleActivity extends BaseActivity {
         displayHeight = display.getHeight();
 
         frameGround =(FrameLayout)findViewById(R.id.frame_grooud);
-        frameDeck =(FrameLayout)findViewById(R.id.frame_deck);
+
 
         frameGround.addView(new appView.BattleGroundView(this));
-        frameDeck.addView(new appView.BattleDeckView(this));
 
     }
 }
