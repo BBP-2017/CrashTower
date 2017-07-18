@@ -65,6 +65,7 @@ public class BattleGroundView extends View{
 
         backgroundBitmap = Bitmap.createScaledBitmap(backgroundBitmap, displayRight, displayBottom, true);
 
+
     }
 
     // Timer Handler
@@ -75,6 +76,15 @@ public class BattleGroundView extends View{
         }
     };
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if(event.getAction() == MotionEvent.ACTION_DOWN){
+            x = (int) event.getX();
+            y = (int) event.getY();
+        }
+        
+        return super.onTouchEvent(event);
+    }
 
     // 그림그리는 영역
     @Override
