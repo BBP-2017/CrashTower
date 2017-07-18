@@ -79,8 +79,8 @@ public class BattleGroundView extends View{
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(event.getAction() == MotionEvent.ACTION_DOWN){
-            //x = (int) event.getX();
-            //y = (int) event.getY();
+            x = (int) event.getX();
+            y = (int) event.getY();
         }
 
         return super.onTouchEvent(event);
@@ -91,7 +91,7 @@ public class BattleGroundView extends View{
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        //canvas.drawBitmap(backgroundBitmap, 0, 0,paint);
+        canvas.drawBitmap(backgroundBitmap, 0, 0,paint);
 
         moveMob();
 
