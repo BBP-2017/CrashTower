@@ -1,4 +1,4 @@
-package model;
+package com.bbp.crashtower.model;
 
 /**
  * Created by dongbin on 2017-07-19.

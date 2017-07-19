@@ -1,18 +1,8 @@
-package appView;
+package com.bbp.crashtower.view;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.view.Display;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-
-import com.bbp.crashtower.R;
 
 /**
  * Created by dongbin on 2017-07-18.

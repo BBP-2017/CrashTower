@@ -1,4 +1,4 @@
-package appView;
+package com.bbp.crashtower.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -7,15 +7,12 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.os.Message;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 
 import com.bbp.crashtower.R;
 
-import model.Mob;
+import com.bbp.crashtower.model.Mob;
 
 /**
  * Created by dongbin on 2017-07-18.

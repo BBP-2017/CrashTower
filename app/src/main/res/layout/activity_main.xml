@@ -17,7 +17,7 @@
         >
 
         <ImageButton
-            android:id="@+id/btnOption"
+            android:id="@+id/btn_option"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:onClick="onClick"
@@ -35,11 +35,11 @@
             tools:layout_editor_absoluteY="201dp" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/btn_mypage"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="108dp"
             android:layout_height="63dp"
-            android:onClick="onClick1"
+            android:onClick="onClick"
             android:text="My Page"
             android:visibility="visible"
             />

@@ -1,21 +1,14 @@
 package com.bbp.crashtower;
 
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
 
 public class MainActivity extends BaseActivity {
 
@@ -34,21 +27,21 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.btn_strory).setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        Intent intent_battle = new Intent(getApplicationContext(), BattleActivity.class);
-                        startActivity(intent_battle);
+                        startActivity(new Intent(getApplicationContext(), BattleActivity.class));
                     }
                 }
         );
     }
     public void onClick(View v) {
-        Intent intent = new Intent(this, OptionActivity.class);
-        Intent intent01=new Intent(getApplicationContext(), Mypage01Activity.class);
+
         switch (v.getId()){
-            case R.id.btnOption:
-                startActivity(intent);
+            case R.id.btn_option:
+                startActivity(new Intent(this, OptionActivity.class));
                 break;
-            case  R.id.button5:
-                startActivity(intent01);
+            case  R.id.btn_mypage:
+                startActivity(new Intent(getApplicationContext(), Mypage01Activity.class));
+                break;
+            default:
                 break;
         }
     }
