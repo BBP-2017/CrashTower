@@ -60,9 +60,9 @@ public class BattleGroundView extends View{
         mob1_Bitmap = Bitmap.createScaledBitmap(mob1_Bitmap, mob1_Bitmap.getWidth()/2 , mob1_Bitmap.getHeight()/2, true);
         mob3_Bitmap = Bitmap.createScaledBitmap(mob3_Bitmap, mob3_Bitmap.getWidth()/3, mob3_Bitmap.getHeight()/3, true);
 
-        mob1_1 = new Mob(1,mob1_Bitmap.getWidth() / 2,mob1_Bitmap.getHeight() / 2,100,100,30,30);
-        mob2_1 = new Mob(2,mob2_Bitmap.getWidth() / 2,mob2_Bitmap.getHeight() / 2,1000,1000,-10,-10);
-        mob3_1 = new Mob(3,mob3_Bitmap.getWidth() / 2,mob3_Bitmap.getHeight() / 2,500,500,-200,200);
+        mob1_1 = new Mob(1,mob1_Bitmap.getWidth() / 2,mob1_Bitmap.getHeight() / 2,1500,1000,30,30);
+        mob2_1 = new Mob(2,mob2_Bitmap.getWidth() / 2,mob2_Bitmap.getHeight() / 2,500,1000,-10,-10);
+        mob3_1 = new Mob(3,mob3_Bitmap.getWidth() / 2,mob3_Bitmap.getHeight() / 2,1000,500,-200,200);
 
         ////
 
@@ -84,7 +84,14 @@ public class BattleGroundView extends View{
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(event.getAction() == MotionEvent.ACTION_DOWN){
-            mob3_1.setTarget((int) event.getX(),(int) event.getY());
+            int x = (int)event.getX();
+            int y = (int)event.getY();
+
+            // 터치범위 제한
+            int restrict = mob3_1.getRw()*2;
+
+            if((x > displayLeft+restrict && x < displayRight-restrict) && (y > displayTop+restrict && y < displayBottom-restrict) )
+                mob3_1.setTarget(x,y);
         }
 
         return super.onTouchEvent(event);
@@ -97,8 +104,6 @@ public class BattleGroundView extends View{
 
         canvas.drawBitmap(backgroundBitmap, 0, 0,paint);
 
-
-        //
         restrictMob(mob1_1);
         restrictMob(mob2_1);
         restrictMob(mob3_1);
@@ -107,9 +112,9 @@ public class BattleGroundView extends View{
         canvas.drawBitmap(mob2_Bitmap, mob2_1.getX()- mob2_1.getRw(), mob2_1.gety() - mob2_1.getRh(),null);
         canvas.drawBitmap(mob3_Bitmap, mob3_1.getX()- mob3_1.getRw(), mob3_1.gety() - mob3_1.getRh(),null);
 
-        ////
     }
 
+    // mob들 제한 구역 설정
     public void restrictMob(Mob mob){
         if(mob.getX() <  displayLeft + mob.getRw()){
             mob.setX(displayLeft + mob.getRw());
