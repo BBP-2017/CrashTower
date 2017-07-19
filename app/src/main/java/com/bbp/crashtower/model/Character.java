@@ -6,8 +6,17 @@ package com.bbp.crashtower.model;
 
 public class Character {
     public String name;
+    public int image;
 
-    public Character(String name) {
-        this.name = name;
+    public int getImage(){
+        return image;
     }
+    public String getName(){
+        return name;
+    }
+    public Character(int image, String name){
+        this.name=name;
+        this.image=image;
+    }
+
 }
