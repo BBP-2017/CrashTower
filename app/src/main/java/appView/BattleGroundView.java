@@ -15,6 +15,8 @@ import android.view.WindowManager;
 
 import com.bbp.crashtower.R;
 
+import model.Mob;
+
 /**
  * Created by dongbin on 2017-07-18.
  */
@@ -23,15 +25,11 @@ public class BattleGroundView extends View{
 
     int displayLeft, displayTop, displayRight, displayBottom;
 
-    int x, y;       // 캐릭터의 현재 좌표
-    int sx, sy;     // 캐릭터가 이동할 방향과 거리
-    int rw, rh;     // 캐릭터의 중심점
-
     Paint paint;
 
-    Bitmap backgroundBitmap, babaBitmap;
+    Bitmap backgroundBitmap, mob1_Bitmap, mob2_Bitmap;
 
-
+    Mob mob1_1, mob1_2, mob2_1;
 
     //초기화 영역
     public BattleGroundView(Context context){
@@ -40,17 +38,22 @@ public class BattleGroundView extends View{
         paint = new Paint();
 
         backgroundBitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.battle_ground);
-        babaBitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.baba);
 
-        rw = babaBitmap.getWidth() / 2;     // 캐릭터의 중심점
-        rh = babaBitmap.getHeight() / 2;
 
-        x = 100;    // 캐릭터 초기 좌표
-        y = 100;
-        sx = 30;     // 캐릭터 1회에 이동할 거리
-        sy = 30;
+        // Mob 초기화
 
-        mHandler.sendEmptyMessageDelayed(0,10);     // Handler 호출
+        mob1_Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.baba);
+        mob2_Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.pekka);
+
+        mob1_1 = new Mob(1,mob1_Bitmap.getWidth() / 2,mob1_Bitmap.getHeight() / 2,100,100,30,30);
+        mob1_2 = new Mob(1,mob1_Bitmap.getWidth() / 2,mob1_Bitmap.getHeight() / 2,500,700,-30,-30);
+        mob2_1 = new Mob(2,mob2_Bitmap.getWidth() / 2,mob2_Bitmap.getHeight() / 2,1000,1000,-10,10);
+
+
+
+        ////
+
+        mHandler.sendEmptyMessageDelayed(0,100);     // Handler 호출
     }
 
     // view가 layout에 적용됬을때 호출됨
@@ -66,11 +69,15 @@ public class BattleGroundView extends View{
         backgroundBitmap = Bitmap.createScaledBitmap(backgroundBitmap, displayRight, displayBottom, true);
 
 
+        new Thread(mob1_1).start();
+        new Thread(mob1_2).start();
+        new Thread(mob2_1).start();
     }
 
     // Timer Handler
     Handler mHandler = new Handler(){
         public void handleMessage(Message msg){
+
             invalidate();   // View를 다시 그림
             mHandler.sendEmptyMessageDelayed(0,100);
         }
@@ -79,8 +86,8 @@ public class BattleGroundView extends View{
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(event.getAction() == MotionEvent.ACTION_DOWN){
-            x = (int) event.getX();
-            y = (int) event.getY();
+            mob1_2.setX((int) event.getX());
+            mob1_2.setY((int) event.getY());
         }
 
         return super.onTouchEvent(event);
@@ -91,32 +98,37 @@ public class BattleGroundView extends View{
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawBitmap(backgroundBitmap, 0, 0,paint);
+        //canvas.drawBitmap(backgroundBitmap, 0, 0,paint);
 
-        moveMob();
 
-        canvas.drawBitmap(babaBitmap, x - rw, y - rh,null);
+        //
+        restrictMob(mob1_1);
+        restrictMob(mob1_2);
+        restrictMob(mob2_1);
+
+        canvas.drawBitmap(mob1_Bitmap, mob1_1.getX()- mob1_1.getRw(), mob1_1.gety() - mob1_1.getRh(),null);
+        canvas.drawBitmap(mob1_Bitmap, mob1_2.getX()- mob1_2.getRw(), mob1_2.gety() - mob1_2.getRh(),null);
+        canvas.drawBitmap(mob2_Bitmap, mob2_1.getX()- mob2_1.getRw(), mob2_1.gety() - mob2_1.getRh(),null);
+
+        ////
     }
 
-    public void moveMob(){
-        x += sx;    //수평으로 이동
-        y += sy;    //수직으로 이동
-        if(x <  displayLeft + rw){
-            x = displayLeft + rw;
-            sx = -sx;
+    public void restrictMob(Mob mob){
+        if(mob.getX() <  displayLeft + mob.getRw()){
+            mob.setX(displayLeft + mob.getRw());
+            mob.setDirSx();
         }
-        if(x > displayRight - rw){
-            x = displayRight - rw;
-            sx = -sx;
+        if(mob.getX() > displayRight - mob.getRw()){
+            mob.setX(displayRight - mob.getRw());
+            mob.setDirSx();
         }
-        if(y <  displayTop + rh){
-            y = displayTop + rh;
-            sy = -sy;
+        if(mob.gety() <  displayTop + mob.getRh()){
+            mob.setY(displayTop + mob.getRh());
+            mob.setDirSy();
         }
-        if(y > displayBottom - rh){
-            y = displayBottom - rh;
-            sy = -sy;
+        if(mob.gety() > displayBottom - mob.getRh()){
+            mob.setY(displayBottom - mob.getRh());
+            mob.setDirSy();
         }
     }
-
 }
