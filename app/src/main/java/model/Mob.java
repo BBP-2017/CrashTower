@@ -13,6 +13,10 @@ public class Mob implements Runnable{
     int hp, power, speed;
     int kind;
 
+    int targetX, targetY;
+
+    boolean targetOn;
+
     public Mob(int kind,int rw, int rh, int x, int y, int sx, int sy){
         this.kind = kind;
         this.rw = rw;
@@ -21,15 +25,17 @@ public class Mob implements Runnable{
         this.y = y;
         this.sx  = sx;
         this.sy = sy;
+        speed = Math.abs(sx);
 
         setStack();
+
     }
 
 
     @Override
     public void run() {
         while (true){
-            moveMob();
+            move();
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
@@ -50,6 +56,12 @@ public class Mob implements Runnable{
                 power = 20;
                 speed = 5;
                 break;
+            case 3:
+                hp = 50;
+                power = 10;
+                speed = 20;
+                targetOn = true;
+                break;
             default:
                 hp = 100;
                 power = 10;
@@ -57,10 +69,33 @@ public class Mob implements Runnable{
                 break;
         }
     }
-    private void moveMob(){
+    private void move(){
         x += sx;    //수평으로 이동
         y += sy;    //수직으로 이동
+
+        if(targetOn) {
+            if (x < targetX) {
+                sx = speed;
+            }
+            if (x > targetX) {
+                sx = -speed;
+            }
+            if (y < targetY) {
+                sy = speed;
+            }
+            if (y > targetY) {
+                sy = -speed;
+            }
+        }
     }
+
+    public void setTarget(int x, int y){
+
+        targetX = x;
+        targetY = y;
+
+    }
+
     public void setX(int x){
         this.x = x;
     }
@@ -73,6 +108,9 @@ public class Mob implements Runnable{
     public void setDirSy(){
         this.sy = -sy;
     }
+//    public void setTargetOn(Boolean on){
+//        this.targetOn = on;
+//    }
     public int getX(){
         return x;
     }
