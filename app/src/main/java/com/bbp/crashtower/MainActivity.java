@@ -1,5 +1,3 @@
-// Version #1 마무리 !!
-
 package com.bbp.crashtower;
 
 
