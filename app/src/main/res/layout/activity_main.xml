@@ -34,9 +34,18 @@
             tools:layout_editor_absoluteX="97dp"
             tools:layout_editor_absoluteY="201dp" />
 
+        <Button
+            android:id="@+id/button5"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="108dp"
+            android:layout_height="63dp"
+            android:onClick="onClick1"
+            android:text="My Page"
+            android:visibility="visible"
+            />
+
+
     </android.support.v7.widget.LinearLayoutCompat>
-
-
 
 
 
