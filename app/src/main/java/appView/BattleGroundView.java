@@ -37,21 +37,6 @@ public class BattleGroundView extends View{
 
         paint = new Paint();
 
-        backgroundBitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.battle_ground);
-
-
-        // Mob 초기화
-
-        mob1_Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.baba);
-        mob2_Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.pekka);
-        mob3_Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.bone);
-
-        mob1_1 = new Mob(1,mob1_Bitmap.getWidth() / 2,mob1_Bitmap.getHeight() / 2,100,100,30,30);
-        mob2_1 = new Mob(2,mob2_Bitmap.getWidth() / 2,mob2_Bitmap.getHeight() / 2,1000,1000,-10,-10);
-        mob3_1 = new Mob(3,mob3_Bitmap.getWidth() / 2,mob3_Bitmap.getHeight() / 2,500,500,-100,100);
-
-        ////
-
         mHandler.sendEmptyMessageDelayed(0,100);     // Handler 호출
     }
 
@@ -65,8 +50,21 @@ public class BattleGroundView extends View{
         displayTop = top;
         displayBottom = bottom;
 
-        backgroundBitmap = Bitmap.createScaledBitmap(backgroundBitmap, displayRight, displayBottom, true);
+        backgroundBitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.battle_ground);
 
+        mob1_Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.baba);
+        mob2_Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.pekka);
+        mob3_Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.bone);
+
+        backgroundBitmap = Bitmap.createScaledBitmap(backgroundBitmap, displayRight, displayBottom, true);
+        mob1_Bitmap = Bitmap.createScaledBitmap(mob1_Bitmap, mob1_Bitmap.getWidth()/2 , mob1_Bitmap.getHeight()/2, true);
+        mob3_Bitmap = Bitmap.createScaledBitmap(mob3_Bitmap, mob3_Bitmap.getWidth()/3, mob3_Bitmap.getHeight()/3, true);
+
+        mob1_1 = new Mob(1,mob1_Bitmap.getWidth() / 2,mob1_Bitmap.getHeight() / 2,100,100,30,30);
+        mob2_1 = new Mob(2,mob2_Bitmap.getWidth() / 2,mob2_Bitmap.getHeight() / 2,1000,1000,-10,-10);
+        mob3_1 = new Mob(3,mob3_Bitmap.getWidth() / 2,mob3_Bitmap.getHeight() / 2,500,500,-200,200);
+
+        ////
 
         new Thread(mob1_1).start();
         new Thread(mob2_1).start();
