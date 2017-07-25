@@ -1,31 +1,35 @@
 package model;
 
+
+import android.graphics.Rect;
+import android.graphics.RectF;
+
 /**
  * Created by dongbin on 2017-07-19.
  */
 
-public class Mob implements Runnable{
+public class Mob extends RectF implements Runnable{
 
-    int x, y;       // 캐릭터의 현재 좌표
-    int sx, sy;     // 캐릭터가 이동할 방향과 거리
-    int rw, rh;     // 캐릭터의 중심점
+    int kind;       //캐릭터 종류
 
-    int hp, power, speed;
-    int kind;
+    int hp, power,speed, dx,dy;
 
-    int targetX, targetY;
+    RectF target;
 
     boolean targetOn;
 
-    public Mob(int kind,int rw, int rh, int x, int y, int sx, int sy){
+    public Mob(RectF r) {
+        super(r);
+    }
+    public  Mob(int kind, RectF r, RectF target){
+        this(r);
         this.kind = kind;
-        this.rw = rw;
-        this.rh = rh;
-        this.x = x;
-        this.y = y;
-        this.sx  = sx;
-        this.sy = sy;
-        speed = Math.abs(sx);
+        if(target==null){
+            targetOn = false;
+        }else {
+            targetOn = true;
+            this.target = target;
+        }
 
         setStack();
 
@@ -49,79 +53,66 @@ public class Mob implements Runnable{
             case 1:
                 hp = 100;
                 power = 10;
-                speed = 10;
+                speed = 30;
+                dx = speed;
+                dy = speed;
                 break;
             case 2:
                 hp = 200;
                 power = 20;
-                speed = 5;
+                speed = 10;
+                dx = -speed;
+                dy = -speed;
                 break;
             case 3:
                 hp = 50;
                 power = 10;
-                speed = 20;
-                targetOn = true;
+                speed = 200;
+                dx = -speed;
+                dy = speed;
                 break;
             default:
                 hp = 100;
                 power = 10;
                 speed = 10;
+                dx = speed;
+                dy = speed;
                 break;
         }
     }
     private void move(){
-        x += sx;    //수평으로 이동
-        y += sy;    //수직으로 이동
+        left += dx;    //수평으로 이동
+        top += dy;    //수직으로 이동
 
         if(targetOn) {
-            if (x < targetX) {
-                sx = speed;
+            if (left < target.centerX()) {
+                dx = speed;
             }
-            if (x > targetX) {
-                sx = -speed;
+            if (left > target.centerX()) {
+                dx = -speed;
             }
-            if (y < targetY) {
-                sy = speed;
+            if (top < target.centerY()) {
+                dy = speed;
             }
-            if (y > targetY) {
-                sy = -speed;
+            if (top > target.centerY()) {
+                dy = -speed;
             }
         }
     }
 
-    public void setTarget(int x, int y){
-
-        targetX = x;
-        targetY = y;
-
+    public void setTarget(RectF target){
+        this.target = target;
     }
 
-    public void setX(int x){
-        this.x = x;
+    public void changeDirDx(){
+        dx = -dx;
     }
-    public void setY(int y){
-        this.y = y;
+    public void changeDirDy(){
+        dy = -dy;
     }
-    public void setDirSx(){
-        this.sx = -sx;
-    }
-    public void setDirSy(){
-        this.sy = -sy;
-    }
-//    public void setTargetOn(Boolean on){
-//        this.targetOn = on;
-//    }
-    public int getX(){
-        return x;
-    }
-    public int gety(){
-        return y;
-    }
-    public int getRw(){
-        return rw;
-    }
-    public int getRh(){
-        return  rh;
+
+    public void setTargetOn(Boolean on){
+        this.targetOn = on;
     }
 
 }

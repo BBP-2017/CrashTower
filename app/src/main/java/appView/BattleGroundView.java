@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.Handler;
 import android.os.Message;
 import android.util.DisplayMetrics;
@@ -23,7 +25,7 @@ import model.Mob;
 
 public class BattleGroundView extends View{
 
-    int displayLeft, displayTop, displayRight, displayBottom;
+    RectF displayRect;
 
     Paint paint;
 
@@ -45,10 +47,7 @@ public class BattleGroundView extends View{
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
 
-        displayLeft = left;
-        displayRight = right;
-        displayTop = top;
-        displayBottom = bottom;
+        displayRect = new RectF(left,top,right,bottom);
 
         backgroundBitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.battle_ground);
 
@@ -56,15 +55,13 @@ public class BattleGroundView extends View{
         mob2_Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.pekka);
         mob3_Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.bone);
 
-        backgroundBitmap = Bitmap.createScaledBitmap(backgroundBitmap, displayRight, displayBottom, true);
+        backgroundBitmap = Bitmap.createScaledBitmap(backgroundBitmap, (int)displayRect.width(), (int)displayRect.height(), true);
         mob1_Bitmap = Bitmap.createScaledBitmap(mob1_Bitmap, mob1_Bitmap.getWidth()/2 , mob1_Bitmap.getHeight()/2, true);
         mob3_Bitmap = Bitmap.createScaledBitmap(mob3_Bitmap, mob3_Bitmap.getWidth()/3, mob3_Bitmap.getHeight()/3, true);
 
-        mob1_1 = new Mob(1,mob1_Bitmap.getWidth() / 2,mob1_Bitmap.getHeight() / 2,1500,1000,30,30);
-        mob2_1 = new Mob(2,mob2_Bitmap.getWidth() / 2,mob2_Bitmap.getHeight() / 2,500,1000,-10,-10);
-        mob3_1 = new Mob(3,mob3_Bitmap.getWidth() / 2,mob3_Bitmap.getHeight() / 2,1000,500,-200,200);
-
-        ////
+        mob1_1 = new Mob(1,new RectF(500,500,mob1_Bitmap.getWidth() / 2,mob1_Bitmap.getHeight() / 2),null);
+        mob2_1 = new Mob(2,new RectF(500,1000,mob1_Bitmap.getWidth() / 2,mob1_Bitmap.getHeight() / 2),null);
+        mob3_1 = new Mob(3,new RectF(1000,500,mob1_Bitmap.getWidth() / 2,mob1_Bitmap.getHeight() / 2),null);
 
         new Thread(mob1_1).start();
         new Thread(mob2_1).start();
@@ -88,10 +85,10 @@ public class BattleGroundView extends View{
             int y = (int)event.getY();
 
             // 터치범위 제한
-            int restrict = mob3_1.getRw()*2;
+            int restrict = (int)mob3_1.width()*2;
 
-            if((x > displayLeft+restrict && x < displayRight-restrict) && (y > displayTop+restrict && y < displayBottom-restrict) )
-                mob3_1.setTarget(x,y);
+            if((x > displayRect.left+restrict && x < displayRect.right-restrict) && (y > displayRect.top+restrict && y < displayRect.bottom-restrict) )
+                mob3_1.setTarget(new RectF(x,y,1,1));
         }
 
         return super.onTouchEvent(event);
@@ -108,29 +105,29 @@ public class BattleGroundView extends View{
         restrictMob(mob2_1);
         restrictMob(mob3_1);
 
-        canvas.drawBitmap(mob1_Bitmap, mob1_1.getX()- mob1_1.getRw(), mob1_1.gety() - mob1_1.getRh(),null);
-        canvas.drawBitmap(mob2_Bitmap, mob2_1.getX()- mob2_1.getRw(), mob2_1.gety() - mob2_1.getRh(),null);
-        canvas.drawBitmap(mob3_Bitmap, mob3_1.getX()- mob3_1.getRw(), mob3_1.gety() - mob3_1.getRh(),null);
+        canvas.drawBitmap(mob1_Bitmap, mob1_1.left- mob1_1.width(), mob1_1.top - mob1_1.height(),null);
+        canvas.drawBitmap(mob2_Bitmap, mob2_1.left- mob2_1.width(), mob2_1.top - mob2_1.height(),null);
+        canvas.drawBitmap(mob3_Bitmap, mob3_1.left- mob3_1.width(), mob3_1.top - mob3_1.height(),null);
 
     }
 
     // mob들 제한 구역 설정
     public void restrictMob(Mob mob){
-        if(mob.getX() <  displayLeft + mob.getRw()){
-            mob.setX(displayLeft + mob.getRw());
-            mob.setDirSx();
+        if(mob.left <  displayRect.left + mob.width()){
+            mob.left= displayRect.left + mob.width();
+            mob.changeDirDx();
         }
-        if(mob.getX() > displayRight - mob.getRw()){
-            mob.setX(displayRight - mob.getRw());
-            mob.setDirSx();
+        if(mob.left > displayRect.right - mob.width()){
+            mob.left=displayRect.right - mob.width();
+            mob.changeDirDx();
         }
-        if(mob.gety() <  displayTop + mob.getRh()){
-            mob.setY(displayTop + mob.getRh());
-            mob.setDirSy();
+        if(mob.top <  displayRect.top + mob.height()){
+            mob.right = displayRect.top + mob.height();
+            mob.changeDirDy();
         }
-        if(mob.gety() > displayBottom - mob.getRh()){
-            mob.setY(displayBottom - mob.getRh());
-            mob.setDirSy();
+        if(mob.top > displayRect.bottom - mob.height()){
+            mob.right = displayRect.bottom - mob.height();
+            mob.changeDirDy();
         }
     }
 }
