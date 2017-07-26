@@ -7,6 +7,8 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
+import com.bbp.crashtower.view.BattleGroundView;
+
 public class BattleActivity extends BaseActivity {
 
     FrameLayout frameGround;
@@ -29,7 +31,7 @@ public class BattleActivity extends BaseActivity {
         displayHeight = display.getHeight();
 
         frameGround =(FrameLayout)findViewById(R.id.frame_grooud);
-        frameGround.addView(new com.bbp.crashtower.view.BattleGroundView(this));
+        frameGround.addView(new BattleGroundView(this));
 
 
     }
