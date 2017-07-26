@@ -1,23 +1,11 @@
 package com.bbp.crashtower;
 
-import android.app.Activity;
-import android.content.ClipData;
-import android.content.ClipDescription;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
-import android.view.DragEvent;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class BattleActivity extends BaseActivity {
 
