@@ -52,21 +52,21 @@ public class Mob extends RectF implements Runnable {
             case 1:
                 hp = 100;
                 power = 10;
-                speed = 10;
+                speed = 20;
                 dx = speed;
                 dy = speed;
                 break;
             case 2:
                 hp = 200;
                 power = 20;
-                speed = 5;
+                speed = 10;
                 dx = -speed;
                 dy = -speed;
                 break;
             case 3:
                 hp = 50;
                 power = 10;
-                speed = 20;
+                speed = 30;
                 dx = -speed;
                 dy = speed;
                 break;
@@ -123,6 +123,11 @@ public class Mob extends RectF implements Runnable {
 
     public void setTarget(RectF target) {
         this.target = target;
+    }
+
+    public void changeDir(){
+        dx = - dx;
+        dy = -dy;
     }
 
     public void setTargetOn(Boolean on) {

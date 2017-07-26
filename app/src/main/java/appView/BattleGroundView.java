@@ -106,6 +106,12 @@ public class BattleGroundView extends View {
         canvas.drawBitmap(mob2_Bitmap, mob2_1.left, mob2_1.top, null);
         canvas.drawBitmap(mob3_Bitmap, mob3_1.left, mob3_1.top, null);
 
+        if(mob1_1.intersect(mob3_1)){
+            mob1_1.changeDir();
+        }
+        if(mob2_1.intersect(mob3_1)){
+            mob2_1.changeDir();
+        }
     }
 
 }
