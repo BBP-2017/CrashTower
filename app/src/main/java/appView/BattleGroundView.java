@@ -59,9 +59,9 @@ public class BattleGroundView extends View{
         mob1_Bitmap = Bitmap.createScaledBitmap(mob1_Bitmap, mob1_Bitmap.getWidth()/2 , mob1_Bitmap.getHeight()/2, true);
         mob3_Bitmap = Bitmap.createScaledBitmap(mob3_Bitmap, mob3_Bitmap.getWidth()/3, mob3_Bitmap.getHeight()/3, true);
 
-        mob1_1 = new Mob(1,new RectF(500,500,mob1_Bitmap.getWidth() / 2,mob1_Bitmap.getHeight() / 2),null);
-        mob2_1 = new Mob(2,new RectF(500,1000,mob1_Bitmap.getWidth() / 2,mob1_Bitmap.getHeight() / 2),null);
-        mob3_1 = new Mob(3,new RectF(1000,500,mob1_Bitmap.getWidth() / 2,mob1_Bitmap.getHeight() / 2),null);
+        mob1_1 = new Mob(1,new RectF(500,500,mob1_Bitmap.getWidth(),mob1_Bitmap.getHeight()),null);
+        mob2_1 = new Mob(2,new RectF(500,1000,mob2_Bitmap.getWidth(),mob2_Bitmap.getHeight()),null);
+        mob3_1 = new Mob(3,new RectF(1000,500,mob3_Bitmap.getWidth(),mob3_Bitmap.getHeight()),null);
 
         new Thread(mob1_1).start();
         new Thread(mob2_1).start();
