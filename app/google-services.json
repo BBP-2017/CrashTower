@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "831096650304",
+    "firebase_url": "https://crashtower-de280.firebaseio.com",
+    "project_id": "crashtower-de280",
+    "storage_bucket": "crashtower-de280.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831096650304:android:237397ee0329189e",
+        "android_client_info": {
+          "package_name": "com.bbp.crashtower"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "831096650304-fohfj0rifpjcumh9mpd48pmsfslnsq5e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bbp.crashtower",
+            "certificate_hash": "4a395f2db00ceda6e99464681e0784d62f40fc76"
+          }
+        },
+        {
+          "client_id": "831096650304-51jq0kfbfl5uj5dh4140md33h2v2eh30.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnEWViNVV6WRl9TdLaIoDpk7_S9e3DhjA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "831096650304-51jq0kfbfl5uj5dh4140md33h2v2eh30.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,5 @@
 package com.bbp.crashtower;
 
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,10 +16,8 @@ import android.widget.ToggleButton;
 public class OptionActivity extends AppCompatActivity {
 
     EditText idInput, passwordInput;
+    String sId, sPw;
     CheckBox autoLogin;
-    Boolean loginChecked;
-    SharedPreferences pref;
-    SharedPreferences.Editor editor;
     ToggleButton stb;
 
     protected void onCreate(Bundle savedInstanceState){
@@ -47,6 +44,8 @@ public class OptionActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.loginBtn:
+                sId = idInput.getText().toString();
+                sPw = passwordInput.getText().toString();
                 break;
             case R.id.signupBtn:
                 break;
