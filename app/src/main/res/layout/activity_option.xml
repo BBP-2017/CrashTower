@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="350dip"
+    android:layout_height="355dip"
+    android:background="#FFFFFF"
+    android:layout_centerInParent="true">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="SET OPTIONS"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="SOUND"
+        android:id="@+id/soundTxt"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignStart="@+id/emailInput" />
+
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/soundBtn"
+        android:onClick="onClick"
+        android:textOff="OFF"
+        android:textOn="ON"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CLOSE"
+        android:id="@+id/btnClose"
+        android:onClick="onClick"
+        android:layout_marginLeft="200dp"
+        android:layout_marginRight="200dp"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:id="@+id/emailInput"
+        android:hint="ID"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/soundTxt"
+        android:layout_alignStart="@+id/pwInput" />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:id="@+id/pwInput"
+        android:layout_centerHorizontal="true"
+        android:hint="Password"
+        android:layout_below="@+id/emailInput"/>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:text="Log in"
+        android:id="@+id/loginBtn"
+        android:onClick="onClick"
+        android:textAllCaps="false"
+        android:layout_marginTop="3dp"
+        android:layout_below="@+id/pwInput"
+        android:layout_toStartOf="@+id/signupBtn"/>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:text="Sign up"
+        android:id="@+id/signupBtn"
+        android:onClick="onClick"
+        android:textAllCaps="false"
+        android:layout_alignTop="@+id/loginBtn"
+        android:layout_alignEnd="@+id/pwInput"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remember ID"
+        android:id="@+id/checkBox"
+        android:layout_marginTop="1dp"
+        android:layout_below="@+id/loginBtn"
+        android:layout_centerHorizontal="true"/>
+
+
+</RelativeLayout>

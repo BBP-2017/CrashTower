@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context="com.bbp.crashtower.Mypage01Activity">
+    tools:context="com.bbp.crashtower.mypage.Mypage01Activity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycleview"
@@ -26,42 +26,42 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imageView01"
+            android:id="@+id/mpch01"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:srcCompat="@android:drawable/ic_lock_lock" />
 
         <ImageView
-            android:id="@+id/imageView02"
+            android:id="@+id/mpch02"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:srcCompat="@android:drawable/ic_lock_lock" />
 
         <ImageView
-            android:id="@+id/imageView03"
+            android:id="@+id/mpch03"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:srcCompat="@android:drawable/ic_lock_lock" />
 
         <ImageView
-            android:id="@+id/imageView04"
+            android:id="@+id/mpch04"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:srcCompat="@android:drawable/ic_lock_lock" />
 
         <ImageView
-            android:id="@+id/imageView05"
+            android:id="@+id/mpch05"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:srcCompat="@android:drawable/ic_lock_lock" />
 
         <ImageView
-            android:id="@+id/imageView06"
+            android:id="@+id/mpch06"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
