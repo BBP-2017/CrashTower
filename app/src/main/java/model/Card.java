@@ -8,17 +8,17 @@ import android.graphics.RectF;
  * Created by dongbin on 2017-07-19.
  */
 
-public class Mob extends RectF implements Runnable {
+public class Card extends RectF implements Runnable {
 
     int kind;       //캐릭터 종류
 
-    int hp, power, speed, dx, dy;
+    int maxHp, damage, power, speed, dx, dy;
 
     RectF target, display;
 
     boolean targetOn;
 
-    public Mob(int kind, int left, int top, int right, int bottom, RectF target, RectF display) {
+    public Card(int kind, int left, int top, int right, int bottom, RectF target, RectF display) {
         super(left, top, right, bottom);
         this.kind = kind;
         if (target == null) {
@@ -50,28 +50,28 @@ public class Mob extends RectF implements Runnable {
     void setStack() {
         switch (kind) {
             case 1:
-                hp = 100;
+                maxHp = 100;
                 power = 10;
                 speed = 20;
                 dx = speed;
                 dy = speed;
                 break;
             case 2:
-                hp = 200;
+                maxHp = 200;
                 power = 20;
                 speed = 10;
                 dx = -speed;
                 dy = -speed;
                 break;
             case 3:
-                hp = 50;
+                maxHp = 50;
                 power = 10;
                 speed = 30;
                 dx = -speed;
                 dy = speed;
                 break;
             default:
-                hp = 100;
+                maxHp = 100;
                 power = 10;
                 speed = 10;
                 dx = speed;
@@ -134,4 +134,13 @@ public class Mob extends RectF implements Runnable {
         this.targetOn = on;
     }
 
+    public int attack(){
+        return power;
+    }
+    public void damaged(int power){
+        damage += power;
+    }
+    public int getHp(){
+        return maxHp - damage;
+    }
 }

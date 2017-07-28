@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.Handler;
@@ -14,7 +15,9 @@ import android.widget.Toast;
 
 import com.bbp.crashtower.R;
 
-import model.Mob;
+import model.Card;
+import model.Tower;
+import model.Unit;
 
 /**
  * Created by dongbin on 2017-07-18.
@@ -26,9 +29,10 @@ public class BattleGroundView extends View {
 
     Paint paint;
 
-    Bitmap backgroundBitmap, mob1_Bitmap, mob2_Bitmap, mob3_Bitmap;
+    Bitmap backgroundBitmap, unit1Bitmap, unit2Bitmap, unit3Bitmap, tower1Bitmap;
 
-    Mob mob1_1, mob2_1, mob3_1;
+    Unit unit1, unit2, unit3;
+    Tower tower1_1;
 
     //초기화 영역
     public BattleGroundView(Context context) {
@@ -48,25 +52,27 @@ public class BattleGroundView extends View {
         Toast.makeText(getContext(),""+displayRect.width()+" / "+displayRect.height(),Toast.LENGTH_SHORT).show();
 
 
-        mob1_1 = new Mob(1,500, 500, 500+100, 500+100, null,displayRect);
-        mob2_1 = new Mob(2, 1000, 1000, 1000+200, 1000+200, null,displayRect);
-        mob3_1 = new Mob(3, 1000, 1000, 1000+50, 1000+50, new RectF(500,500,1,1),displayRect);
+        unit1 = new Unit(1,500, 500, 500+100, 500+100, null,displayRect);
+        unit2 = new Unit(2, 1000, 1000, 1000+200, 1000+200, null,displayRect);
+        unit3 = new Unit(3, 1000, 1000, 1000+50, 1000+50, new RectF(500,500,1,1),displayRect);
+
+
 
         backgroundBitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.battle_ground);
 
-        mob1_Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.baba);
-        mob2_Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.pekka);
-        mob3_Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.bone);
+        unit1Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.baba);
+        unit2Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.pekka);
+        unit3Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.bone);
 
         backgroundBitmap = Bitmap.createScaledBitmap(backgroundBitmap, (int) displayRect.width(), (int) displayRect.height(), true);
-        mob1_Bitmap = Bitmap.createScaledBitmap(mob1_Bitmap, (int)mob1_1.width(), (int)mob1_1.height(), true);
-        mob2_Bitmap = Bitmap.createScaledBitmap(mob2_Bitmap, (int)mob2_1.width(), (int)mob2_1.height(), true);
-        mob3_Bitmap = Bitmap.createScaledBitmap(mob3_Bitmap, (int)mob3_1.width(), (int)mob3_1.height(), true);
+        unit1Bitmap = Bitmap.createScaledBitmap(unit1Bitmap, (int) unit1.width(), (int) unit1.height(), true);
+        unit2Bitmap = Bitmap.createScaledBitmap(unit2Bitmap, (int) unit2.width(), (int) unit2.height(), true);
+        unit3Bitmap = Bitmap.createScaledBitmap(unit3Bitmap, (int) unit3.width(), (int) unit3.height(), true);
 
 
-        new Thread(mob1_1).start();
-        new Thread(mob2_1).start();
-        new Thread(mob3_1).start();
+        new Thread(unit1).start();
+        new Thread(unit2).start();
+        new Thread(unit3).start();
 
     }
 
@@ -86,10 +92,10 @@ public class BattleGroundView extends View {
             int y = (int) event.getY();
 
             // 터치범위 제한
-            int restrict = (int) mob3_1.width() * 2;
+            int restrict = (int) unit3.width() * 2;
 
             if ((x > displayRect.left + restrict && x < displayRect.right - restrict) && (y > displayRect.top + restrict && y < displayRect.bottom - restrict))
-                mob3_1.setTarget(new RectF(x, y, x+1, y+1));
+                unit3.setTarget(new RectF(x, y, x+1, y+1));
         }
 
         return super.onTouchEvent(event);
@@ -102,15 +108,21 @@ public class BattleGroundView extends View {
 
         canvas.drawBitmap(backgroundBitmap, 0, 0, paint);
 
-        canvas.drawBitmap(mob1_Bitmap, mob1_1.left, mob1_1.top, null);
-        canvas.drawBitmap(mob2_Bitmap, mob2_1.left, mob2_1.top, null);
-        canvas.drawBitmap(mob3_Bitmap, mob3_1.left, mob3_1.top, null);
+        canvas.drawBitmap(unit1Bitmap, unit1.left, unit1.top, null);
+        canvas.drawBitmap(unit2Bitmap, unit2.left, unit2.top, null);
+        canvas.drawBitmap(unit3Bitmap, unit3.left, unit3.top, null);
 
-        if(mob1_1.intersect(mob3_1)){
-            mob1_1.changeDir();
+        paint.setColor(Color.RED);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(100);
+
+        //canvas.drawRect(new RectF(unit1.left,unit1.top+20,unit1.getHp(),10), paint);
+
+        if(unit1.intersect(unit3)){
+            unit1.changeDir();
         }
-        if(mob2_1.intersect(mob3_1)){
-            mob2_1.changeDir();
+        if(unit2.intersect(unit3)){
+            unit2.changeDir();
         }
     }
 
