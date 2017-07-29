@@ -81,7 +81,10 @@ public class BattleGroundView extends View {
         public void handleMessage(Message msg) {
 
             invalidate();   // View를 다시 그림
-            mHandler.sendEmptyMessageDelayed(0, 100);
+
+            detectedCards(); // 카드 감지 처리
+
+            mHandler.sendEmptyMessageDelayed(0, 10);
         }
     };
 
@@ -118,10 +121,14 @@ public class BattleGroundView extends View {
 
         //canvas.drawRect(new RectF(unit1.left,unit1.top+20,unit1.getHp(),10), paint);
 
-        if(unit1.intersect(unit3)){
+
+    }
+
+    void  detectedCards(){
+        if(unit1.sensorArea.intersect(unit3)){
             unit1.changeDir();
         }
-        if(unit2.intersect(unit3)){
+        if(unit2.sensorArea.intersect(unit3)){
             unit2.changeDir();
         }
     }

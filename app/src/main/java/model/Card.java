@@ -10,11 +10,16 @@ import android.graphics.RectF;
 
 public class Card extends RectF implements Runnable {
 
+
     int kind;       //캐릭터 종류
 
     int maxHp, damage, power, speed, dx, dy;
+    int sensorRange;
+
+    final int SEANSOR_RANGE = 50;
 
     RectF target, display;
+    public RectF sensorArea;
 
     boolean targetOn;
 
@@ -29,11 +34,9 @@ public class Card extends RectF implements Runnable {
         }
         this.display = display;
 
-
         setStack();
 
     }
-
 
     @Override
     public void run() {
@@ -55,6 +58,7 @@ public class Card extends RectF implements Runnable {
                 speed = 20;
                 dx = speed;
                 dy = speed;
+                sensorArea = new RectF(left+sensorRange+speed,top+sensorRange+speed,right+sensorRange+speed,bottom+sensorRange+speed);
                 break;
             case 2:
                 maxHp = 200;
@@ -62,6 +66,7 @@ public class Card extends RectF implements Runnable {
                 speed = 10;
                 dx = -speed;
                 dy = -speed;
+                sensorArea = new RectF(left+sensorRange+speed,top+sensorRange+speed,right+sensorRange+speed,bottom+sensorRange+speed);
                 break;
             case 3:
                 maxHp = 50;
@@ -69,13 +74,16 @@ public class Card extends RectF implements Runnable {
                 speed = 30;
                 dx = -speed;
                 dy = speed;
+                sensorArea = new RectF(left+sensorRange+speed,top+sensorRange+speed,right+sensorRange+speed,bottom+sensorRange+speed);
                 break;
+
             default:
                 maxHp = 100;
                 power = 10;
                 speed = 10;
                 dx = speed;
                 dy = speed;
+                sensorArea = new RectF(left+sensorRange+speed,top+sensorRange+speed,right+sensorRange+speed,bottom+sensorRange+speed);
                 break;
         }
     }
