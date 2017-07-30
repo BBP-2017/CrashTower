@@ -17,8 +17,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".BattleActivity" />
-        <activity android:name=".OptionActivity" />
         <activity android:name=".Mypage01Activity" />
+        <activity
+            android:name=".SettingActivity"
+            android:theme="@android:style/Theme.Material.Light.Dialog">
+        </activity>
     </application>
 
 </manifest>

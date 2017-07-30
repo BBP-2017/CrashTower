@@ -92,7 +92,7 @@ public class MainActivity extends BaseActivity {
 
         switch (v.getId()){
             case R.id.btn_option:
-                startActivity(new Intent(this, OptionActivity.class));
+                startActivity(new Intent(getApplicationContext(), SettingActivity.class));
                 break;
             case  R.id.btn_mypage:
                 startActivity(new Intent(getApplicationContext(), Mypage01Activity.class));
