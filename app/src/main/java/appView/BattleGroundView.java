@@ -52,9 +52,9 @@ public class BattleGroundView extends View {
         Toast.makeText(getContext(),""+displayRect.width()+" / "+displayRect.height(),Toast.LENGTH_SHORT).show();
 
 
-        unit1 = new Unit(1,500, 500, 500+100, 500+100, null,displayRect);
-        unit2 = new Unit(2, 1000, 1000, 1000+200, 1000+200, null,displayRect);
-        unit3 = new Unit(3, 1000, 1000, 1000+50, 1000+50, new RectF(500,500,1,1),displayRect);
+        unit1 = new Unit(1,500, 500, 500+100, 500+100,displayRect);
+        unit2 = new Unit(2, 1000, 1000, 1000+200, 1000+200,displayRect);
+        unit3 = new Unit(3, 1000, 1000, 1000+50, 1000+50,displayRect);
 
 
 
@@ -125,10 +125,10 @@ public class BattleGroundView extends View {
     }
 
     void  detectedCards(){
-        if(unit1.sensorArea.intersect(unit3)){
+        if(unit1.sensor.intersect(unit3)){
             unit1.changeDir();
         }
-        if(unit2.sensorArea.intersect(unit3)){
+        if(unit2.sensor.intersect(unit3)){
             unit2.changeDir();
         }
     }

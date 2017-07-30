@@ -7,7 +7,9 @@ import android.graphics.RectF;
  */
 
 public class Tower extends Card {
-    public Tower(int kind, int left, int top, int right, int bottom, RectF target, RectF display) {
-        super(kind, left, top, right, bottom, target, display);
+
+    public Tower(int left, int top, int right, int bottom, int cardID) {
+        super(left, top, right, bottom, cardID);
+
     }
 }
