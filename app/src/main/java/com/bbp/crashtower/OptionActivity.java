@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ToggleButton;
@@ -24,6 +25,13 @@ public class OptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+        //팝업 외부 블러처리
+        layoutParams.flags=WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        //블러농도
+        layoutParams.dimAmount=0.7f;
+        //적용
+        getWindow().setAttributes(layoutParams);
         setContentView(R.layout.activity_option);
         idInput = (EditText)findViewById(R.id.emailInput);
         passwordInput = (EditText)findViewById(R.id.pwInput);
