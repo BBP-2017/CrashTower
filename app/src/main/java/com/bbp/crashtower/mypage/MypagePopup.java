@@ -16,13 +16,17 @@ import android.widget.TextView;
 import com.bbp.crashtower.R;
 import com.bbp.crashtower.model.Character;
 
+import java.util.ArrayList;
+
 
 public class MypagePopup extends Activity {
     Character char01;
+    ArrayList<Character> select;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
         char01 = (Character) intent.getSerializableExtra("CHAR");
+        select=(ArrayList<Character>) intent.getSerializableExtra("Choicech");
         super.onCreate(savedInstanceState);
 //TITLE바 NONONO.
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -41,6 +45,22 @@ public class MypagePopup extends Activity {
     public void ChExEquipbt(View v){
         Intent intent = new Intent(getApplicationContext(), MypageEquip.class);
         intent.putExtra("EQUIP",char01 );
-        startActivity(intent);
+        intent.putExtra("Equipch",select);
+        startActivityForResult(intent,0);
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode) {
+            case 1:
+                Intent intent = new Intent();
+                ArrayList<Character> Reselect=(ArrayList<Character>) data.getSerializableExtra("Rechar");
+                intent.putExtra("Rechar", Reselect);
+                setResult(1, intent);
+                finish();
+//B의 신호를 받아 실행할 작업
+                break;
+            default:
+                break;
+        }
     }
 }

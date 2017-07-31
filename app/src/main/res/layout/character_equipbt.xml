@@ -1,54 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/button3"
+    <ImageButton
+        android:id="@+id/ChSelect01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="1"
-        android:onClick="cheq01"/>
+        android:onClick="Chsel01"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        app:srcCompat="@mipmap/ic_launcher_round" />
 
-    <Button
-        android:id="@+id/button5"
+    <ImageButton
+        android:id="@+id/ChSelect02"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="2"
-        android:onClick="cheq02"/>
+        android:onClick="Chsel02"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        app:srcCompat="@mipmap/ic_launcher_round" />
 
-    <Button
-        android:id="@+id/button8"
+    <ImageButton
+        android:id="@+id/ChSelect03"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="3"
-        android:onClick="cheq03"/>
+        android:onClick="Chsel03"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        app:srcCompat="@mipmap/ic_launcher_round" />
 
-    <Button
-        android:id="@+id/button7"
+    <ImageButton
+        android:id="@+id/ChSelect04"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="4"
-        android:onClick="cheq04" />
+        android:onClick="Chsel04"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        app:srcCompat="@mipmap/ic_launcher_round" />
 
-    <Button
-        android:id="@+id/button6"
+    <ImageButton
+        android:id="@+id/ChSelect05"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="5"
-        android:onClick="cheq05"/>
+        android:onClick="Chsel05"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        app:srcCompat="@mipmap/ic_launcher_round" />
 
-    <Button
-        android:id="@+id/button4"
+    <ImageButton
+        android:id="@+id/ChSelect06"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="6"
-        android:onClick="cheq06"/>
+        android:onClick="Chsel06"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        app:srcCompat="@mipmap/ic_launcher_round" />
 </LinearLayout>

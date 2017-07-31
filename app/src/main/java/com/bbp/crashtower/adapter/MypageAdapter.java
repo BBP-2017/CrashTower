@@ -1,5 +1,6 @@
 package com.bbp.crashtower.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -14,19 +15,20 @@ import com.bbp.crashtower.model.Character;
 import com.bbp.crashtower.mypage.MypagePopup;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 
 /**
  * Created by roto1 on 2017-07-12.
  */
 
-public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder> implements ItemTouchHelperListener {
-    ArrayList<Character> characters;
+public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder>  {
+    ArrayList<Character> characters,select;
 
-
-    public MypageAdapter(ArrayList<Character> characters) {
+    int choice;
+    public MypageAdapter(ArrayList<Character> characters,int choice,ArrayList<Character> select) {
         this.characters = characters;
+        this.choice=choice;
+        this.select=select;
     }
 
     @Override
@@ -34,13 +36,14 @@ public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_character_item, parent, false);
         return new ViewHolder(view);
 
-
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {  //필수 메소드 2: ListView에서 getView 부분을 담당하는 메소드
+
         holder.tvName.setText(characters.get(position).name);
         holder.ivImage.setImageResource(characters.get(position).image);
+
         holder.ivImage.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v)  {
@@ -48,10 +51,31 @@ public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder
                 Context context = v.getContext();
                 Intent intent = new Intent(context.getApplicationContext(), MypagePopup.class);
                 intent.putExtra("CHAR",char01 );
-                context.startActivity(intent);
+                intent.putExtra("Choicech",select);
+                ((Activity)context).startActivityForResult(intent,0);
             }
         });
     }
+    /*
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+     //   super.onActivityResult(0, resultCode, data);
+        if(requestCode==0) {
+            switch (resultCode) {
+                case 1:
+
+                    Intent intent = new Intent();
+                    ArrayList<Character> char01 = (ArrayList<Character>) data.getSerializableExtra("Rechar");
+                    intent.putExtra("Rechar", char01);
+                     setResult(1, intent);
+                    finish();
+                    //B의 신호를 받아 실행할 작업
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    */
 
     @Override                                           //필수 메소드3
     public int getItemCount() {
@@ -68,23 +92,4 @@ public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder
             ivImage = itemView.findViewById(R.id.iv_main);
         }
     }
-    public boolean onItemMove(int fromPosition, int toPosition) {
-        if (fromPosition < toPosition) {
-            for (int i = fromPosition; i < toPosition; i++) {
-                Collections.swap(characters, i, i + 1);
-            }
-        } else {
-            for (int i = fromPosition; i > toPosition; i--) {
-                Collections.swap(characters, i, i - 1);
-            }
-        }
-        notifyItemMoved(fromPosition, toPosition);
-        return true;
-    }
-    @Override
-    public void onItemRemove(int position) {
-        characters.remove(position);
-        notifyItemRemoved(position);
-    }
-
  }
