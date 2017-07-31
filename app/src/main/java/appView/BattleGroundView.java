@@ -108,15 +108,19 @@ public class BattleGroundView extends View {
 
         canvas.drawBitmap(backgroundBitmap, 0, 0, paint);
 
+        paint.setColor(Color.RED);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(10);
+
+        canvas.drawRect(new RectF(unit1.sensor), paint);
+        canvas.drawRect(new RectF(unit2.sensor), paint);
+        canvas.drawRect(new RectF(unit3.sensor), paint);
+
         canvas.drawBitmap(unit1Bitmap, unit1.left, unit1.top, null);
         canvas.drawBitmap(unit2Bitmap, unit2.left, unit2.top, null);
         canvas.drawBitmap(unit3Bitmap, unit3.left, unit3.top, null);
 
-        //paint.setColor(Color.RED);
-        //paint.setStyle(Paint.Style.STROKE);
-        //paint.setStrokeWidth(100);
 
-        //canvas.drawRect(new RectF(unit1.left,unit1.top+20,unit1.getHp(),10), paint);
 
 
     }

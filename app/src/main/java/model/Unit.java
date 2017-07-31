@@ -21,7 +21,7 @@ public class Unit extends Card implements Runnable{
         this.display = display;
 
         setStack();
-        sensor = new RectF(left + sensorRange, top + sensorRange, right + sensorRange, bottom + sensorRange);
+        sensor = new RectF(left - sensorRange, top - sensorRange, right + sensorRange, bottom + sensorRange);
     }
 
     @Override
@@ -56,7 +56,6 @@ public class Unit extends Card implements Runnable{
                 speed = 20;
                 dx = speed;
                 dy = speed;
-                sensorRange = (int)width()*2;
                 break;
             case 2:
                 maxHp = 200;
@@ -64,7 +63,6 @@ public class Unit extends Card implements Runnable{
                 speed = 10;
                 dx = -speed;
                 dy = -speed;
-                sensorRange = (int)width()*2;
                 break;
             case 3:
                 maxHp = 50;
@@ -72,7 +70,6 @@ public class Unit extends Card implements Runnable{
                 speed = 30;
                 dx = -speed;
                 dy = speed;
-                sensorRange = (int)width()*2;
                 break;
             default:
                 maxHp = 100;
@@ -80,14 +77,14 @@ public class Unit extends Card implements Runnable{
                 speed = 20;
                 dx = speed;
                 dy = speed;
-                sensorRange = (int)width()*2;
                 break;
         }
+        sensorRange = (int)width();
     }
 
     private void move() {
         offset(dx, dy); // 사각형 크기 유지 이동
-        //sensor.offset(dx,dy); // 센서도 같이 이동
+        sensor.offset(dx,dy); // 센서도 같이 이동
 
         restrictUnit();
 
@@ -113,19 +110,15 @@ public class Unit extends Card implements Runnable{
 
         if (left < display.left) {
             dx = -dx;
-            offset(dx, 0);
         }
         if (right > display.right) {
             dx = -dx;
-            offset(dx, 0);
         }
         if (top < display.top) {
             dy = -dy;
-            offset(0, dy);
         }
         if (bottom > display.bottom) {
             dy = -dy;
-            offset(0, dy);
         }
     }
 
