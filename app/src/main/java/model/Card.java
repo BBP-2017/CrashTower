@@ -13,11 +13,17 @@ public class Card extends RectF{
 
     int cardID;       //캐릭터 종류
 
-    int maxHp, damage, power, speed;
+    int maxHp, damage, power, sensorRange , attackSpeed;
+
+    public RectF sensor;
 
     public Card(int cardID,int left, int top, int right, int bottom) {
         super(left, top, right, bottom);
         this.cardID = cardID;
+    }
+
+    void setStack() {
+
     }
 
     public int attack(){

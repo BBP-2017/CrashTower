@@ -31,7 +31,9 @@ public class BattleGroundView extends View {
     Bitmap backgroundBitmap, unit1Bitmap, unit2Bitmap, unit3Bitmap, tower1Bitmap;
 
     Unit unit1, unit2, unit3;
-    Tower tower1_1;
+    Tower tower1;
+
+    boolean gameOver;
 
     //초기화 영역
     public BattleGroundView(Context context) {
@@ -52,25 +54,28 @@ public class BattleGroundView extends View {
         unit1 = new Unit(1,500, 500, 500+100, 500+100,displayRect);
         unit2 = new Unit(2,1000, 1000, 1000+200, 1000+200,displayRect);
         unit3 = new Unit(3,1000, 1000, 1000+50, 1000+50,displayRect);
-
+        tower1 = new Tower(4,(int)displayRect.right/2-100,(int)displayRect.bottom/4-150,(int)displayRect.right/2+100,(int)displayRect.bottom/4+150);
 
 
         backgroundBitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.battle_ground);
-
         unit1Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.baba);
         unit2Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.pekka);
         unit3Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.bone);
+        tower1Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.king_tower);
 
         backgroundBitmap = Bitmap.createScaledBitmap(backgroundBitmap, (int) displayRect.width(), (int) displayRect.height(), true);
         unit1Bitmap = Bitmap.createScaledBitmap(unit1Bitmap, (int) unit1.width(), (int) unit1.height(), true);
         unit2Bitmap = Bitmap.createScaledBitmap(unit2Bitmap, (int) unit2.width(), (int) unit2.height(), true);
         unit3Bitmap = Bitmap.createScaledBitmap(unit3Bitmap, (int) unit3.width(), (int) unit3.height(), true);
+        tower1Bitmap = Bitmap.createScaledBitmap(tower1Bitmap, (int) tower1.width(), (int) tower1.height(), true);
 
 
         new Thread(unit1).start();
         new Thread(unit2).start();
         new Thread(unit3).start();
-        Toast.makeText(getContext(),"Thread Create",Toast.LENGTH_SHORT).show();
+        new Thread(tower1).start();
+
+
     }
 
     // Timer Handler
@@ -79,7 +84,7 @@ public class BattleGroundView extends View {
 
             invalidate();   // View를 다시 그림
 
-            //detectedUnits(); // Unit 감지 처리
+            detectedUnits(); // Unit 감지 처리
 
             mHandler.sendEmptyMessageDelayed(0, 100);
         }
@@ -106,7 +111,7 @@ public class BattleGroundView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawBitmap(backgroundBitmap, 0, 0, paint);
+        //canvas.drawBitmap(backgroundBitmap, 0, 0, paint);
 
         paint.setColor(Color.RED);
         paint.setStyle(Paint.Style.STROKE);
@@ -115,10 +120,12 @@ public class BattleGroundView extends View {
         canvas.drawRect(new RectF(unit1.sensor), paint);
         canvas.drawRect(new RectF(unit2.sensor), paint);
         canvas.drawRect(new RectF(unit3.sensor), paint);
+        canvas.drawRect(new RectF(tower1.sensor), paint);
 
         canvas.drawBitmap(unit1Bitmap, unit1.left, unit1.top, null);
         canvas.drawBitmap(unit2Bitmap, unit2.left, unit2.top, null);
         canvas.drawBitmap(unit3Bitmap, unit3.left, unit3.top, null);
+        canvas.drawBitmap(tower1Bitmap, tower1.left, tower1.top, null);
 
 
 
@@ -129,8 +136,15 @@ public class BattleGroundView extends View {
         if(unit1.sensor.intersect(unit3)){
             unit1.setTarget(unit3);
         }
-        if(unit2.sensor.intersect(unit3)){
+        if(unit2.sensor.intersect(unit3)) {
             unit2.setTarget(unit3);
+        }
+        if(tower1.intersect(unit3)){
+            tower1.damaged(unit3.attack());
+            unit3.changeDir();
+            if(tower1.getHp()<0){
+                gameOver = true;
+            }
         }
     }
 

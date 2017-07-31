@@ -9,11 +9,11 @@ import android.util.Log;
 
 public class Unit extends Card implements Runnable{
 
-    int dx, dy, sensorRange;
+    int dx, dy, runSpeed;
 
     boolean targetOn;
 
-    public RectF display, target, sensor;
+    public RectF display, target;
 
     public Unit( int cardID,int left, int top, int right, int bottom,RectF display) {
         super(cardID,left, top, right, bottom);
@@ -29,10 +29,10 @@ public class Unit extends Card implements Runnable{
         while (true) {
             move();
             if (targetOn) {
-                if (!sensor.contains(target)) {
-                    targetOn = false;
-                    target = null;
-                }
+                //if (!sensor.contains(target.centerX(),target.centerY())) {
+                 //   targetOn = false;
+                 //   target = null;
+                //}
             }
             try {
                 Thread.sleep(100);
@@ -53,30 +53,30 @@ public class Unit extends Card implements Runnable{
             case 1:
                 maxHp = 100;
                 power = 10;
-                speed = 20;
-                dx = speed;
-                dy = speed;
+                runSpeed = 20;
+                dx = runSpeed;
+                dy = runSpeed;
                 break;
             case 2:
                 maxHp = 200;
                 power = 20;
-                speed = 10;
-                dx = -speed;
-                dy = -speed;
+                runSpeed = 10;
+                dx = -runSpeed;
+                dy = -runSpeed;
                 break;
             case 3:
                 maxHp = 50;
                 power = 10;
-                speed = 30;
-                dx = -speed;
-                dy = speed;
+                runSpeed = 30;
+                dx = -runSpeed;
+                dy = runSpeed;
                 break;
             default:
                 maxHp = 100;
                 power = 10;
-                speed = 20;
-                dx = speed;
-                dy = speed;
+                runSpeed = 20;
+                dx = runSpeed;
+                dy = runSpeed;
                 break;
         }
         sensorRange = (int)width();
@@ -90,16 +90,16 @@ public class Unit extends Card implements Runnable{
 
         if (targetOn) {
             if (left < target.centerX()) {
-                dx = speed;
+                dx = runSpeed;
             }
             if (left > target.centerX()) {
-                dx = -speed;
+                dx = -runSpeed;
             }
             if (top < target.centerY()) {
-                dy = speed;
+                dy = runSpeed;
             }
             if (top > target.centerY()) {
-                dy = -speed;
+                dy = -runSpeed;
             }
         }
 
