@@ -29,10 +29,10 @@ public class Unit extends Card implements Runnable{
         while (true) {
             move();
             if (targetOn) {
-                //if (!sensor.contains(target.centerX(),target.centerY())) {
-                 //   targetOn = false;
-                 //   target = null;
-                //}
+                if (!sensor.contains(target.centerX(),target.centerY())) {
+                    targetOn = false;
+                    target = null;
+                }
             }
             try {
                 Thread.sleep(100);

@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -85,6 +86,7 @@ public class BattleGroundView extends View {
             invalidate();   // View를 다시 그림
 
             detectedUnits(); // Unit 감지 처리
+            
 
             mHandler.sendEmptyMessageDelayed(0, 100);
         }
@@ -133,15 +135,16 @@ public class BattleGroundView extends View {
     }
 
     void  detectedUnits(){
-        if(unit1.sensor.intersect(unit3)){
+        if(unit1.sensor.contains(unit3)){
             unit1.setTarget(unit3);
         }
-        if(unit2.sensor.intersect(unit3)) {
+        if(unit2.sensor.contains(unit3)) {
             unit2.setTarget(unit3);
         }
-        if(tower1.intersect(unit3)){
+        if(unit3.intersect(tower1)){
             tower1.damaged(unit3.attack());
             unit3.changeDir();
+            Log.d("unit3 to Tower","attacked");
             if(tower1.getHp()<0){
                 gameOver = true;
             }
