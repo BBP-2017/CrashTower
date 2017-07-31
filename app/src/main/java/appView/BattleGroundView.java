@@ -1,6 +1,7 @@
 package appView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -14,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.bbp.crashtower.BattleActivity;
 import com.bbp.crashtower.R;
 
 import model.Tower;
@@ -86,7 +88,10 @@ public class BattleGroundView extends View {
             invalidate();   // View를 다시 그림
 
             detectedUnits(); // Unit 감지 처리
-            
+
+            if(gameOver){
+                
+            }
 
             mHandler.sendEmptyMessageDelayed(0, 100);
         }
