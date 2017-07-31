@@ -1,7 +1,6 @@
 package appView;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -57,7 +56,7 @@ public class BattleGroundView extends View {
         unit1 = new Unit(1,500, 500, 500+100, 500+100,displayRect);
         unit2 = new Unit(2,1000, 1000, 1000+200, 1000+200,displayRect);
         unit3 = new Unit(3,1000, 1000, 1000+50, 1000+50,displayRect);
-        tower1 = new Tower(4,(int)displayRect.right/2-100,(int)displayRect.bottom/4-150,(int)displayRect.right/2+100,(int)displayRect.bottom/4+150);
+        tower1 = new Tower(4,(int)displayRect.right/2-100,(int)displayRect.bottom/6-150,(int)displayRect.right/2+100,(int)displayRect.bottom/6+150);
 
 
         backgroundBitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.battle_ground);
@@ -90,7 +89,7 @@ public class BattleGroundView extends View {
             detectedUnits(); // Unit 감지 처리
 
             if(gameOver){
-                
+                // result 브랜치에서 구현
             }
 
             mHandler.sendEmptyMessageDelayed(0, 100);
@@ -118,7 +117,7 @@ public class BattleGroundView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        //canvas.drawBitmap(backgroundBitmap, 0, 0, paint);
+        canvas.drawBitmap(backgroundBitmap, 0, 0, paint);
 
         paint.setColor(Color.RED);
         paint.setStyle(Paint.Style.STROKE);
@@ -133,9 +132,6 @@ public class BattleGroundView extends View {
         canvas.drawBitmap(unit2Bitmap, unit2.left, unit2.top, null);
         canvas.drawBitmap(unit3Bitmap, unit3.left, unit3.top, null);
         canvas.drawBitmap(tower1Bitmap, tower1.left, tower1.top, null);
-
-
-
 
     }
 
