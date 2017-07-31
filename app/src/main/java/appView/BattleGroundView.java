@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.bbp.crashtower.R;
 
-import model.Card;
 import model.Tower;
 import model.Unit;
 
@@ -49,12 +48,10 @@ public class BattleGroundView extends View {
         super.onLayout(changed, left, top, right, bottom);
 
         displayRect = new RectF(left, top, right, bottom);
-        Toast.makeText(getContext(),""+displayRect.width()+" / "+displayRect.height(),Toast.LENGTH_SHORT).show();
-
 
         unit1 = new Unit(1,500, 500, 500+100, 500+100,displayRect);
-        unit2 = new Unit(2, 1000, 1000, 1000+200, 1000+200,displayRect);
-        unit3 = new Unit(3, 1000, 1000, 1000+50, 1000+50,displayRect);
+        unit2 = new Unit(2,1000, 1000, 1000+200, 1000+200,displayRect);
+        unit3 = new Unit(3,1000, 1000, 1000+50, 1000+50,displayRect);
 
 
 
@@ -73,7 +70,7 @@ public class BattleGroundView extends View {
         new Thread(unit1).start();
         new Thread(unit2).start();
         new Thread(unit3).start();
-
+        Toast.makeText(getContext(),"Thread Create",Toast.LENGTH_SHORT).show();
     }
 
     // Timer Handler
@@ -82,9 +79,9 @@ public class BattleGroundView extends View {
 
             invalidate();   // View를 다시 그림
 
-            detectedCards(); // 카드 감지 처리
+            //detectedUnits(); // Unit 감지 처리
 
-            mHandler.sendEmptyMessageDelayed(0, 10);
+            mHandler.sendEmptyMessageDelayed(0, 100);
         }
     };
 
@@ -115,21 +112,21 @@ public class BattleGroundView extends View {
         canvas.drawBitmap(unit2Bitmap, unit2.left, unit2.top, null);
         canvas.drawBitmap(unit3Bitmap, unit3.left, unit3.top, null);
 
-        paint.setColor(Color.RED);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(100);
+        //paint.setColor(Color.RED);
+        //paint.setStyle(Paint.Style.STROKE);
+        //paint.setStrokeWidth(100);
 
         //canvas.drawRect(new RectF(unit1.left,unit1.top+20,unit1.getHp(),10), paint);
 
 
     }
 
-    void  detectedCards(){
+    void  detectedUnits(){
         if(unit1.sensor.intersect(unit3)){
-            unit1.changeDir();
+            unit1.setTarget(unit3);
         }
         if(unit2.sensor.intersect(unit3)){
-            unit2.changeDir();
+            unit2.setTarget(unit3);
         }
     }
 

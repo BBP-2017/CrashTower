@@ -1,6 +1,7 @@
 package model;
 
 import android.graphics.RectF;
+import android.util.Log;
 
 /**
  * Created by dongbin on 2017-07-28.
@@ -8,18 +9,14 @@ import android.graphics.RectF;
 
 public class Unit extends Card implements Runnable{
 
-    int speed, dx, dy, sensorRange;
+    int dx, dy, sensorRange;
 
     boolean targetOn;
 
     public RectF display, target, sensor;
 
-    public Unit(int left, int top, int right, int bottom, int cardID) {
-        super(left, top, right, bottom, cardID);
-    }
-
-    public Unit(int left, int top, int right, int bottom, int cardID, RectF display) {
-        super(left, top, right, bottom, cardID);
+    public Unit( int cardID,int left, int top, int right, int bottom,RectF display) {
+        super(cardID,left, top, right, bottom);
 
         this.display = display;
 
@@ -29,11 +26,21 @@ public class Unit extends Card implements Runnable{
 
     @Override
     public void run() {
-        move();
-        if(!sensor.contains(target)){
-            targetOn = false;
-            target = null;
+        while (true) {
+            move();
+            if (targetOn) {
+                if (!sensor.contains(target)) {
+                    targetOn = false;
+                    target = null;
+                }
+            }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
     public void setTarget(RectF target) {
@@ -41,34 +48,46 @@ public class Unit extends Card implements Runnable{
         targetOn = true;
     }
 
-    @Override
     void setStack() {
         switch (cardID) {
             case 1:
+                maxHp = 100;
+                power = 10;
+                speed = 20;
                 dx = speed;
                 dy = speed;
                 sensorRange = (int)width()*2;
                 break;
             case 2:
+                maxHp = 200;
+                power = 20;
+                speed = 10;
                 dx = -speed;
                 dy = -speed;
                 sensorRange = (int)width()*2;
                 break;
             case 3:
+                maxHp = 50;
+                power = 10;
+                speed = 30;
                 dx = -speed;
                 dy = speed;
                 sensorRange = (int)width()*2;
                 break;
             default:
+                maxHp = 100;
+                power = 10;
+                speed = 20;
                 dx = speed;
                 dy = speed;
+                sensorRange = (int)width()*2;
                 break;
         }
     }
 
     private void move() {
         offset(dx, dy); // 사각형 크기 유지 이동
-        sensor.offset(dx,dy); // 센서도 같이 이동
+        //sensor.offset(dx,dy); // 센서도 같이 이동
 
         restrictUnit();
 
@@ -86,6 +105,7 @@ public class Unit extends Card implements Runnable{
                 dy = -speed;
             }
         }
+
     }
 
     // unit의 제한 구역 설정
@@ -113,6 +133,4 @@ public class Unit extends Card implements Runnable{
         dx = -dx;
         dy = -dy;
     }
-
-
 }
