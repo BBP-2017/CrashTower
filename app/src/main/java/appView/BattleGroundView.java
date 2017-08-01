@@ -3,20 +3,15 @@ package appView;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-
-import com.bbp.crashtower.BattleActivity;
-import com.bbp.crashtower.R;
 
 import data.CardInfo;
 import model.Tower;
@@ -28,7 +23,7 @@ import model.Unit;
 
 public class BattleGroundView extends View {
 
-    static final int PADDING_BG = 100, MAX_UNITS = 5;
+    static final int PADDING_BG = 50, MAX_UNITS = 5;
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
@@ -37,7 +32,7 @@ public class BattleGroundView extends View {
 
     Paint paint;
 
-    Bitmap backgroundBitmap, unit1Bitmap, unit2Bitmap, unit3Bitmap, tower1Bitmap;
+    Bitmap backgroundBitmap;
 
     Unit[] units = new Unit[MAX_UNITS+1];
 
@@ -94,7 +89,7 @@ public class BattleGroundView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        //canvas.drawBitmap(backgroundBitmap, 0, 0, paint);
+        //canvas.drawBitmap(backgroundBitmap, 0, 0, null);
 
         paint.setColor(Color.RED);
         paint.setStyle(Paint.Style.STROKE);
@@ -103,7 +98,8 @@ public class BattleGroundView extends View {
         for (int i = 1; i <= MAX_UNITS; i++) {
             Unit unit = units[i];
             if(unit!=null) {
-                //canvas.drawRect(unit.getSensor(), paint);
+
+                canvas.drawRect(unit.getSensor(), paint);
                 canvas.drawBitmap(unit.getBitmap(), unit.getBody().left, unit.getBody().top, null);
             }
         }
@@ -142,6 +138,7 @@ public class BattleGroundView extends View {
     }
 
     void  detectedUnits(){
+
     }
 
     void setUnits(int threadIdx,int cardID, int level, int x, int y){

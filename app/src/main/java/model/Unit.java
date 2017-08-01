@@ -26,20 +26,20 @@ public class Unit extends Thread{
 
     public Unit(CardInfo info,int x,int y) {
         setInfo(info);
-        body.offsetTo(x,y);
-        sensor.offsetTo(body.centerX(),body.centerY());
+        body.offsetTo(x-width/2,y-height/2);
+        sensor.offsetTo(x-sensorRange,y-sensorRange);
     }
 
     @Override
     public void run() {
         while (true) {
             move();
-            if (targetOn) {
-                if (!sensor.contains(target.centerX(),target.centerY())) {
-                    targetOn = false;
-                    target = null;
-                }
-            }
+//            if (targetOn) {
+//                if (!sensor.contains(target.centerX(),target.centerY())) {
+//                    targetOn = false;
+//                    target = null;
+//                }
+//            }
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
@@ -73,7 +73,7 @@ public class Unit extends Thread{
 
     private void move() {
         body.offset(dx, dy); // 사각형 크기 유지 이동
-        sensor.offsetTo(body.centerX(),body.centerY()); // 센서도 같이 이동
+        sensor.offset(dx,dy); // 센서도 같이 이동
 
 
         if (targetOn) {
