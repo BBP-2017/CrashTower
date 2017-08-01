@@ -61,8 +61,8 @@ public class Unit extends Thread{
         maxHp = info.maxHp;
         power = info.power;
         moveSpeed = info.moveSpeed;
-        dx = info.moveSpeed;
-        dy = info.moveSpeed;
+        dx = info.dir * info.moveSpeed;
+        dy = info.dir * info.moveSpeed;
         sensorRange = info.sensorRange;
 
         body = info.body;

@@ -28,7 +28,7 @@ import model.Unit;
 
 public class BattleGroundView extends View {
 
-    static final int PADDING_BG = 100;
+    static final int PADDING_BG = 100, MAX_UNITS = 2;
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
@@ -39,7 +39,7 @@ public class BattleGroundView extends View {
 
     Bitmap backgroundBitmap, unit1Bitmap, unit2Bitmap, unit3Bitmap, tower1Bitmap;
 
-    Unit[] units = new Unit[10];
+    Unit[] units = new Unit[MAX_UNITS];
 
     Tower tower1;
 
@@ -100,11 +100,14 @@ public class BattleGroundView extends View {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(10);
 
-        Unit unit = units[0];
-        if(unit!=null) {
-            //canvas.drawRect(unit.getSensor(), paint);
-            canvas.drawBitmap(unit.getBitmap(), unit.getBody().left, unit.getBody().top, null);
+        for (int i = 0; i < MAX_UNITS; i++) {
+            Unit unit = units[i];
+            if(unit!=null) {
+                //canvas.drawRect(unit.getSensor(), paint);
+                canvas.drawBitmap(unit.getBitmap(), unit.getBody().left, unit.getBody().top, null);
+            }
         }
+
 
     }
     @Override
@@ -121,20 +124,19 @@ public class BattleGroundView extends View {
                 editor.commit();
             }
         }
-
-
-
         return super.onTouchEvent(event);
     }
 
     void restrictUnits(){
-        Unit unit = units[0];
-        if(unit!=null) {
-            if (displayRect.left > unit.getBody().left || displayRect.right < unit.getBody().right) {
-                unit.changeDirDx();
-            }
-            if (displayRect.top > unit.getBody().top || displayRect.bottom < unit.getBody().bottom) {
-                unit.changeDirDy();
+        for (int i = 0; i < MAX_UNITS; i++) {
+            Unit unit = units[i];
+            if (unit != null) {
+                if (displayRect.left > unit.getBody().left || displayRect.right < unit.getBody().right) {
+                    unit.changeDirDx();
+                }
+                if (displayRect.top > unit.getBody().top || displayRect.bottom < unit.getBody().bottom) {
+                    unit.changeDirDy();
+                }
             }
         }
     }
