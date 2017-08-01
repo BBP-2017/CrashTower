@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Handler;
 import android.os.Message;
@@ -27,11 +28,12 @@ import model.Unit;
 
 public class BattleGroundView extends View {
 
+    static final int PADDING_BG = 100;
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
 
-    RectF displayRect;
+    Rect displayRect;
 
     Paint paint;
 
@@ -64,7 +66,9 @@ public class BattleGroundView extends View {
 
             invalidate();   // View를 다시 그림
 
+            restrictUnits();
             detectedUnits(); // Unit 감지 처리
+
 
             if(gameOver){
                 // result 브랜치에서 구현
@@ -81,8 +85,7 @@ public class BattleGroundView extends View {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
 
-        //backgroundBitmap =
-        displayRect = new RectF(left, top, right, bottom);
+        displayRect = new Rect(left+PADDING_BG, top+PADDING_BG, right-PADDING_BG, bottom-PADDING_BG);
 
     }
 
@@ -125,6 +128,12 @@ public class BattleGroundView extends View {
     }
 
     void restrictUnits(){
+        Unit unit = units[0];
+        if(unit!=null) {
+            if (!displayRect.contains(unit.getBody())) {
+                unit.changeDir();
+            }
+        }
     }
 
     void  detectedUnits(){
