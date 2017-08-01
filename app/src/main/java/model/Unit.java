@@ -95,9 +95,12 @@ public class Unit extends Thread{
 
     }
 
-    public void changeDir() {
-        dx = -dx;
+    public void changeDirDy() {
         dy = -dy;
+    }
+
+    public void changeDirDx() {
+        dx = -dx;
     }
 
     public  Rect getBody(){

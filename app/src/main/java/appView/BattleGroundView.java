@@ -130,8 +130,11 @@ public class BattleGroundView extends View {
     void restrictUnits(){
         Unit unit = units[0];
         if(unit!=null) {
-            if (!displayRect.contains(unit.getBody())) {
-                unit.changeDir();
+            if (displayRect.left > unit.getBody().left || displayRect.right < unit.getBody().right) {
+                unit.changeDirDx();
+            }
+            if (displayRect.top > unit.getBody().top || displayRect.bottom < unit.getBody().bottom) {
+                unit.changeDirDy();
             }
         }
     }
