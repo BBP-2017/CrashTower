@@ -3,6 +3,7 @@ package appView;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -12,6 +13,8 @@ import android.os.Message;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.bbp.crashtower.R;
 
 import data.CardInfo;
 import model.Tower;
@@ -82,6 +85,8 @@ public class BattleGroundView extends View {
 
         displayRect = new Rect(left+PADDING_BG, top+PADDING_BG, right-PADDING_BG, bottom-PADDING_BG);
 
+        backgroundBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.battle_ground);
+        backgroundBitmap = Bitmap.createScaledBitmap(backgroundBitmap, right, bottom, true);
     }
 
     // 그림그리는 영역
@@ -89,7 +94,7 @@ public class BattleGroundView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        //canvas.drawBitmap(backgroundBitmap, 0, 0, null);
+        canvas.drawBitmap(backgroundBitmap, 0, 0, null);
 
         paint.setColor(Color.RED);
         paint.setStyle(Paint.Style.STROKE);
@@ -116,6 +121,7 @@ public class BattleGroundView extends View {
             int level = 1;
             if(id!=0){
                 setUnits(id,id,level,x,y);
+
                 editor.putInt("cardID",0);
                 editor.commit();
             }
