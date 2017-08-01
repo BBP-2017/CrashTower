@@ -58,9 +58,9 @@ public class BattleActivity extends BaseActivity implements View.OnClickListener
 
         iBtnCard1.setBackgroundResource(new CardInfo(getApplicationContext(),1,1).resID);
         iBtnCard2.setBackgroundResource(new CardInfo(getApplicationContext(),2,1).resID);
-        iBtnCard3.setBackgroundResource(new CardInfo(getApplicationContext(),1,1).resID);
-        iBtnCard4.setBackgroundResource(new CardInfo(getApplicationContext(),1,1).resID);
-        iBtnCard5.setBackgroundResource(new CardInfo(getApplicationContext(),1,1).resID);
+        iBtnCard3.setBackgroundResource(new CardInfo(getApplicationContext(),3,1).resID);
+        iBtnCard4.setBackgroundResource(new CardInfo(getApplicationContext(),4,1).resID);
+        iBtnCard5.setBackgroundResource(new CardInfo(getApplicationContext(),5,1).resID);
 
         iBtnCard1.setOnClickListener(this);
         iBtnCard2.setOnClickListener(this);

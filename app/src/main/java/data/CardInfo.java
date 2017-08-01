@@ -68,14 +68,15 @@ public class CardInfo{
             default:
                 switch (level){
                     default:
-                        width = 100;
-                        height = 100;
-                        maxHp = 200;
+                        width = 300;
+                        height = 400;
+                        maxHp = 1000;
                         damage = 0;
                         power = 20;
-                        moveSpeed = 20;
-                        attackSpeed = 20;
-                        resID = R.drawable.baba;
+                        moveSpeed = 0;
+                        attackSpeed = 10;
+                        dir = 0;
+                        resID = R.drawable.king_tower;
                         break;
                 }
                 break;

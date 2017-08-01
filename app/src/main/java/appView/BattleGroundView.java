@@ -28,7 +28,7 @@ import model.Unit;
 
 public class BattleGroundView extends View {
 
-    static final int PADDING_BG = 100, MAX_UNITS = 2;
+    static final int PADDING_BG = 100, MAX_UNITS = 5;
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
