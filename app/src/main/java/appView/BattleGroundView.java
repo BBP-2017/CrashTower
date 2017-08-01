@@ -1,6 +1,7 @@
 package appView;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -12,11 +13,11 @@ import android.os.Message;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import com.bbp.crashtower.BattleActivity;
 import com.bbp.crashtower.R;
 
+import data.CardInfo;
 import model.Tower;
 import model.Unit;
 
@@ -26,20 +27,30 @@ import model.Unit;
 
 public class BattleGroundView extends View {
 
+
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+
     RectF displayRect;
 
     Paint paint;
 
     Bitmap backgroundBitmap, unit1Bitmap, unit2Bitmap, unit3Bitmap, tower1Bitmap;
 
-    Unit unit1, unit2, unit3;
+    Unit[] units = new Unit[10];
+
     Tower tower1;
 
     boolean gameOver;
 
+
+
     //초기화 영역
-    public BattleGroundView(Context context) {
+    public BattleGroundView(Context context, SharedPreferences pref) {
         super(context);
+
+        this.pref = pref;
+        editor = pref.edit();
 
         paint = new Paint();
 
@@ -52,31 +63,6 @@ public class BattleGroundView extends View {
         super.onLayout(changed, left, top, right, bottom);
 
         displayRect = new RectF(left, top, right, bottom);
-
-        unit1 = new Unit(1,500, 500, 500+100, 500+100,displayRect);
-        unit2 = new Unit(2,1000, 1000, 1000+200, 1000+200,displayRect);
-        unit3 = new Unit(3,1000, 1000, 1000+50, 1000+50,displayRect);
-        tower1 = new Tower(4,(int)displayRect.right/2-100,(int)displayRect.bottom/6-150,(int)displayRect.right/2+100,(int)displayRect.bottom/6+150);
-
-
-        backgroundBitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.battle_ground);
-        unit1Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.baba);
-        unit2Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.pekka);
-        unit3Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.bone);
-        tower1Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.king_tower);
-
-        backgroundBitmap = Bitmap.createScaledBitmap(backgroundBitmap, (int) displayRect.width(), (int) displayRect.height(), true);
-        unit1Bitmap = Bitmap.createScaledBitmap(unit1Bitmap, (int) unit1.width(), (int) unit1.height(), true);
-        unit2Bitmap = Bitmap.createScaledBitmap(unit2Bitmap, (int) unit2.width(), (int) unit2.height(), true);
-        unit3Bitmap = Bitmap.createScaledBitmap(unit3Bitmap, (int) unit3.width(), (int) unit3.height(), true);
-        tower1Bitmap = Bitmap.createScaledBitmap(tower1Bitmap, (int) tower1.width(), (int) tower1.height(), true);
-
-
-        new Thread(unit1).start();
-        new Thread(unit2).start();
-        new Thread(unit3).start();
-        new Thread(tower1).start();
-
 
     }
 
@@ -102,12 +88,16 @@ public class BattleGroundView extends View {
             int x = (int) event.getX();
             int y = (int) event.getY();
 
-            // 터치범위 제한
-            int restrict = (int) unit3.width() * 2;
-
-            if ((x > displayRect.left + restrict && x < displayRect.right - restrict) && (y > displayRect.top + restrict && y < displayRect.bottom - restrict))
-                unit3.setTarget(new RectF(x, y, x+1, y+1));
+            int id = pref.getInt("cardID",0);
+            int level = 1;
+            if(id!=0){
+                setUnits(0,id,level,x,y);
+                editor.putInt("cardID",0);
+                editor.commit();
+            }
         }
+
+
 
         return super.onTouchEvent(event);
     }
@@ -123,33 +113,20 @@ public class BattleGroundView extends View {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(10);
 
-        canvas.drawRect(new RectF(unit1.sensor), paint);
-        canvas.drawRect(new RectF(unit2.sensor), paint);
-        canvas.drawRect(new RectF(unit3.sensor), paint);
-        canvas.drawRect(new RectF(tower1.sensor), paint);
-
-        canvas.drawBitmap(unit1Bitmap, unit1.left, unit1.top, null);
-        canvas.drawBitmap(unit2Bitmap, unit2.left, unit2.top, null);
-        canvas.drawBitmap(unit3Bitmap, unit3.left, unit3.top, null);
-        canvas.drawBitmap(tower1Bitmap, tower1.left, tower1.top, null);
+        Unit unit = units[0];
+        canvas.drawRect(new RectF(unit.getSensor()), paint);
+        canvas.drawBitmap(unit.getBitmap(), unit.getBody().left, unit.getBody().top, null);
 
     }
 
     void  detectedUnits(){
-        if(unit1.sensor.contains(unit3)){
-            unit1.setTarget(unit3);
-        }
-        if(unit2.sensor.contains(unit3)) {
-            unit2.setTarget(unit3);
-        }
-        if(unit3.intersect(tower1)){
-            tower1.damaged(unit3.attack());
-            unit3.changeDir();
-            Log.d("unit3 to Tower","attacked");
-            if(tower1.getHp()<0){
-                gameOver = true;
-            }
-        }
+    }
+
+    void setUnits(int threadIdx,int cardID, int level, int x, int y){
+
+        units[threadIdx] = new Unit(new CardInfo(getContext(),cardID,level),x,y);
+        units[threadIdx].start();
+
     }
 
 }

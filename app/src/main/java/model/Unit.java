@@ -1,27 +1,32 @@
 package model;
 
+import android.graphics.Bitmap;
 import android.graphics.RectF;
 import android.util.Log;
+
+import data.CardInfo;
 
 /**
  * Created by dongbin on 2017-07-28.
  */
 
-public class Unit extends Card implements Runnable{
+public class Unit extends Thread{
 
-    int dx, dy, runSpeed;
+    int dx, dy, width, height;
+
+    int moveSpeed, maxHp,power,sensorRange;
 
     boolean targetOn;
 
-    public RectF display, target;
+    RectF body, target, sensor;
 
-    public Unit( int cardID,int left, int top, int right, int bottom,RectF display) {
-        super(cardID,left, top, right, bottom);
+    Bitmap bitmap;
 
-        this.display = display;
 
-        setStack();
-        sensor = new RectF(left - sensorRange, top - sensorRange, right + sensorRange, bottom + sensorRange);
+    public Unit(CardInfo info,int x,int y) {
+        setInfo(info);
+        body.offsetTo(x,y);
+        sensor.offsetTo(body.centerX(),body.centerY());
     }
 
     @Override
@@ -48,82 +53,61 @@ public class Unit extends Card implements Runnable{
         targetOn = true;
     }
 
-    void setStack() {
-        switch (cardID) {
-            case 1:
-                maxHp = 100;
-                power = 10;
-                runSpeed = 20;
-                dx = runSpeed;
-                dy = runSpeed;
-                break;
-            case 2:
-                maxHp = 200;
-                power = 20;
-                runSpeed = 10;
-                dx = -runSpeed;
-                dy = -runSpeed;
-                break;
-            case 3:
-                maxHp = 50;
-                power = 10;
-                runSpeed = 30;
-                dx = -runSpeed;
-                dy = runSpeed;
-                break;
-            default:
-                maxHp = 100;
-                power = 10;
-                runSpeed = 20;
-                dx = runSpeed;
-                dy = runSpeed;
-                break;
-        }
-        sensorRange = (int)width();
+    void setInfo(CardInfo info) {
+
+        width = info.width;
+        height = info.height;
+        maxHp = info.maxHp;
+        power = info.power;
+        moveSpeed = info.moveSpeed;
+        dx = info.moveSpeed;
+        dy = info.moveSpeed;
+        sensorRange = info.sensorRange;
+
+        body = info.body;
+        sensor = info.sensor;
+
+        bitmap = info.bitmap;
     }
 
     private void move() {
-        offset(dx, dy); // 사각형 크기 유지 이동
-        sensor.offset(dx,dy); // 센서도 같이 이동
+        body.offset(dx, dy); // 사각형 크기 유지 이동
+        sensor.offsetTo(body.centerX(),body.centerY()); // 센서도 같이 이동
 
-        restrictUnit();
 
         if (targetOn) {
-            if (left < target.centerX()) {
-                dx = runSpeed;
+            if (body.centerX() < target.centerX()) {
+                dx = moveSpeed;
+            }else if (body.centerX() > target.centerX()) {
+                dx = -moveSpeed;
+            }else{
+                dx = 0;
             }
-            if (left > target.centerX()) {
-                dx = -runSpeed;
-            }
-            if (top < target.centerY()) {
-                dy = runSpeed;
-            }
-            if (top > target.centerY()) {
-                dy = -runSpeed;
+            if (body.centerY() < target.centerY()) {
+                dy = moveSpeed;
+            }else if (body.centerY() > target.centerY()) {
+                dy = -moveSpeed;
+            }else{
+                dy = 0;
             }
         }
 
-    }
-
-    // unit의 제한 구역 설정
-    public void restrictUnit() {
-
-        if (left < display.left) {
-            dx = -dx;
-        }
-        if (right > display.right) {
-            dx = -dx;
-        }
-        if (top < display.top) {
-            dy = -dy;
-        }
-        if (bottom > display.bottom) {
-            dy = -dy;
-        }
     }
 
     public void changeDir() {
         dx = -dx;
         dy = -dy;
+    }
+
+    public  RectF getBody(){
+        return body;
+    }
+
+    public  RectF getSensor(){
+        return sensor;
+    }
+
+    public  Bitmap getBitmap(){
+        return bitmap;
     }
 }
