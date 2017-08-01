@@ -1,6 +1,7 @@
 package model;
 
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.Log;
 
@@ -18,7 +19,7 @@ public class Unit extends Thread{
 
     boolean targetOn;
 
-    RectF body, target, sensor;
+    Rect body, target, sensor;
 
     Bitmap bitmap;
 
@@ -48,7 +49,7 @@ public class Unit extends Thread{
 
     }
 
-    public void setTarget(RectF target) {
+    public void setTarget(Rect target) {
         this.target = target;
         targetOn = true;
     }
@@ -99,11 +100,11 @@ public class Unit extends Thread{
         dy = -dy;
     }
 
-    public  RectF getBody(){
+    public  Rect getBody(){
         return body;
     }
 
-    public  RectF getSensor(){
+    public  Rect getSensor(){
         return sensor;
     }
 

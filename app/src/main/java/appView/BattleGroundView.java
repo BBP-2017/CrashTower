@@ -57,14 +57,6 @@ public class BattleGroundView extends View {
         mHandler.sendEmptyMessageDelayed(0, 100);     // Handler 호출
     }
 
-    // view가 layout에 적용됬을때 호출됨
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
-
-        displayRect = new RectF(left, top, right, bottom);
-
-    }
 
     // Timer Handler
     Handler mHandler = new Handler() {
@@ -82,6 +74,36 @@ public class BattleGroundView extends View {
         }
     };
 
+
+
+    // view가 layout에 적용됬을때 호출됨
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+
+        //backgroundBitmap =
+        displayRect = new RectF(left, top, right, bottom);
+
+    }
+
+    // 그림그리는 영역
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+        //canvas.drawBitmap(backgroundBitmap, 0, 0, paint);
+
+        paint.setColor(Color.RED);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(10);
+
+        Unit unit = units[0];
+        if(unit!=null) {
+            //canvas.drawRect(unit.getSensor(), paint);
+            canvas.drawBitmap(unit.getBitmap(), unit.getBody().left, unit.getBody().top, null);
+        }
+
+    }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -102,21 +124,7 @@ public class BattleGroundView extends View {
         return super.onTouchEvent(event);
     }
 
-    // 그림그리는 영역
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
-        canvas.drawBitmap(backgroundBitmap, 0, 0, paint);
-
-        paint.setColor(Color.RED);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(10);
-
-        Unit unit = units[0];
-        canvas.drawRect(new RectF(unit.getSensor()), paint);
-        canvas.drawBitmap(unit.getBitmap(), unit.getBody().left, unit.getBody().top, null);
-
+    void restrictUnits(){
     }
 
     void  detectedUnits(){

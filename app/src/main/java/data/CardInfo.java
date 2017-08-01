@@ -3,6 +3,7 @@ package data;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.graphics.RectF;
 
 import com.bbp.crashtower.R;
@@ -17,7 +18,7 @@ public class CardInfo{
 
     public int maxHp, damage, power, sensorRange , attackSpeed, moveSpeed;
 
-    public RectF body, sensor;
+    public Rect body, sensor;
 
     public Bitmap bitmap;
 
@@ -45,7 +46,7 @@ public class CardInfo{
             break;
         }
         sensorRange = width;
-        body = new RectF(0,0,width,height);
-        sensor = new RectF(body.centerX()-sensorRange,body.centerY()-sensorRange,body.centerX()+sensorRange,body.centerY()+sensorRange);
+        body = new Rect(0,0,width,height);
+        sensor = new Rect(body.centerX()-sensorRange,body.centerY()-sensorRange,body.centerX()+sensorRange,body.centerY()+sensorRange);
     }
 }
