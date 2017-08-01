@@ -39,7 +39,7 @@ public class BattleGroundView extends View {
 
     Bitmap backgroundBitmap, unit1Bitmap, unit2Bitmap, unit3Bitmap, tower1Bitmap;
 
-    Unit[] units = new Unit[MAX_UNITS];
+    Unit[] units = new Unit[MAX_UNITS+1];
 
     Tower tower1;
 
@@ -100,7 +100,7 @@ public class BattleGroundView extends View {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(10);
 
-        for (int i = 0; i < MAX_UNITS; i++) {
+        for (int i = 1; i <= MAX_UNITS; i++) {
             Unit unit = units[i];
             if(unit!=null) {
                 //canvas.drawRect(unit.getSensor(), paint);
@@ -119,7 +119,7 @@ public class BattleGroundView extends View {
             int id = pref.getInt("cardID",0);
             int level = 1;
             if(id!=0){
-                setUnits(0,id,level,x,y);
+                setUnits(id,id,level,x,y);
                 editor.putInt("cardID",0);
                 editor.commit();
             }
@@ -128,7 +128,7 @@ public class BattleGroundView extends View {
     }
 
     void restrictUnits(){
-        for (int i = 0; i < MAX_UNITS; i++) {
+        for (int i = 1; i <= MAX_UNITS; i++) {
             Unit unit = units[i];
             if (unit != null) {
                 if (displayRect.left > unit.getBody().left || displayRect.right < unit.getBody().right) {

@@ -15,6 +15,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import data.CardInfo;
+
 public class BattleActivity extends BaseActivity implements View.OnClickListener{
 
     public static final String PREFS_NAME = "MyPrefsFile";
@@ -53,6 +55,12 @@ public class BattleActivity extends BaseActivity implements View.OnClickListener
         iBtnCard3 = (ImageButton)findViewById(R.id.btn_battle_card_3);
         iBtnCard4 = (ImageButton)findViewById(R.id.btn_battle_card_4);
         iBtnCard5 = (ImageButton)findViewById(R.id.btn_battle_card_5);
+
+        iBtnCard1.setBackgroundResource(new CardInfo(getApplicationContext(),1,1).resID);
+        iBtnCard2.setBackgroundResource(new CardInfo(getApplicationContext(),2,1).resID);
+        iBtnCard3.setBackgroundResource(new CardInfo(getApplicationContext(),1,1).resID);
+        iBtnCard4.setBackgroundResource(new CardInfo(getApplicationContext(),1,1).resID);
+        iBtnCard5.setBackgroundResource(new CardInfo(getApplicationContext(),1,1).resID);
 
         iBtnCard1.setOnClickListener(this);
         iBtnCard2.setOnClickListener(this);

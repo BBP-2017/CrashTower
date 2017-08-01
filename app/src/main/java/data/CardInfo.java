@@ -1,10 +1,12 @@
 package data;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 
 import com.bbp.crashtower.R;
 
@@ -24,6 +26,8 @@ public class CardInfo{
 
     public Bitmap bitmap;
 
+    public int resID;
+
     public CardInfo(Context context, int cardID, int level){
         this.cardID = cardID; this.level = level;
         setStack(context);
@@ -42,7 +46,7 @@ public class CardInfo{
                         moveSpeed = 20;
                         attackSpeed = 20;
                         dir = 1;
-                        bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.baba);
+                        resID =  R.drawable.baba;
                         break;
                 }
             break;
@@ -57,7 +61,7 @@ public class CardInfo{
                         moveSpeed = 10;
                         attackSpeed = 10;
                         dir = -1;
-                        bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pekka);
+                        resID =  R.drawable.pekka;
                         break;
                 }
                 break;
@@ -71,7 +75,7 @@ public class CardInfo{
                         power = 20;
                         moveSpeed = 20;
                         attackSpeed = 20;
-                        bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.baba);
+                        resID = R.drawable.baba;
                         break;
                 }
                 break;
@@ -80,6 +84,7 @@ public class CardInfo{
         sensorRange = width;
         body = new Rect(0,0,width,height);
         sensor = new Rect(body.centerX()-sensorRange,body.centerY()-sensorRange,body.centerX()+sensorRange,body.centerY()+sensorRange);
+        bitmap = BitmapFactory.decodeResource(context.getResources(),resID);
         bitmap = Bitmap.createScaledBitmap(bitmap, width, height, true);
     }
 }
