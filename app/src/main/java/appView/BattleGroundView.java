@@ -64,9 +64,13 @@ public class BattleGroundView extends View {
 
             invalidate();   // View를 다시 그림
 
-            restrictUnits();
-            detectedUnits(); // Unit 감지 처리
-
+            for (int i = 1; i <= MAX_UNITS; i++) {
+                Unit unit = units[i];
+                if (unit != null) {
+                    restrictUnits(unit);
+                    detectedUnits(unit); // Unit 감지 처리
+                }
+            }
 
             if(gameOver){
                 // result 브랜치에서 구현
@@ -129,22 +133,26 @@ public class BattleGroundView extends View {
         return super.onTouchEvent(event);
     }
 
-    void restrictUnits(){
-        for (int i = 1; i <= MAX_UNITS; i++) {
-            Unit unit = units[i];
-            if (unit != null) {
-                if (displayRect.left > unit.getBody().left || displayRect.right < unit.getBody().right) {
-                    unit.changeDirDx();
-                }
-                if (displayRect.top > unit.getBody().top || displayRect.bottom < unit.getBody().bottom) {
-                    unit.changeDirDy();
-                }
-            }
+    void restrictUnits(Unit unit){
+
+        if (displayRect.left > unit.getBody().left || displayRect.right < unit.getBody().right) {
+            unit.changeDirDx();
+        }
+        if (displayRect.top > unit.getBody().top || displayRect.bottom < unit.getBody().bottom) {
+            unit.changeDirDy();
         }
     }
 
-    void  detectedUnits(){
+    void  detectedUnits(Unit unit){
 
+        for (int i = 1; i <= MAX_UNITS ; i++) {
+            Unit targetUnit = units[i];
+            if(targetUnit == null) continue;
+            if(unit==targetUnit) continue;
+            if(unit.getSensor().contains(targetUnit.getBody().centerX(),targetUnit.getBody().centerY())){
+                targetUnit.backMpve();
+            }
+        }
     }
 
     void setUnits(int threadIdx,int cardID, int level, int x, int y){

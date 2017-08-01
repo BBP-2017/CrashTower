@@ -17,7 +17,7 @@ public class Unit extends Thread{
 
     int moveSpeed, maxHp,power,sensorRange;
 
-    boolean targetOn;
+    boolean targetOn, moveOn = true;
 
     Rect body, target, sensor;
 
@@ -33,7 +33,8 @@ public class Unit extends Thread{
     @Override
     public void run() {
         while (true) {
-            move();
+            if(moveOn)
+                move();
 //            if (targetOn) {
 //                if (!sensor.contains(target.centerX(),target.centerY())) {
 //                    targetOn = false;
@@ -102,6 +103,12 @@ public class Unit extends Thread{
     public void changeDirDx() {
         dx = -dx;
     }
+
+    public void backMpve() {
+        body.offset(-(dx * 2), -(dy * 2));
+        sensor.offset(-(dx * 2), -(dy * 2));
+    }
+
 
     public  Rect getBody(){
         return body;
