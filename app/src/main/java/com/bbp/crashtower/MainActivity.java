@@ -1,3 +1,5 @@
+
+
 package com.bbp.crashtower;
 
 
@@ -8,13 +10,25 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import com.bbp.crashtower.model.Character;
+import com.bbp.crashtower.mypage.Mypage01Activity;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends BaseActivity {
+        ArrayList<Character> character;
+        String ID;
+        int Level;
+        int EXP;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Level=1;
+        ID="ROTO";
 
         //프로그램 제목 표시줄 없앤다.
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -40,6 +54,10 @@ public class MainActivity extends BaseActivity {
                 break;
             case  R.id.btn_mypage:
                 startActivity(new Intent(getApplicationContext(), Mypage01Activity.class));
+                Intent i=new Intent(getApplicationContext(),Mypage01Activity.class);
+                i.putExtra("ID",ID);
+                i.putExtra("LEVEL",Level);
+                startActivityForResult(i,1);
                 break;
             default:
                 break;

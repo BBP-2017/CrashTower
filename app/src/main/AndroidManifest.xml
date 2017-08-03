@@ -18,7 +18,24 @@
         </activity>
         <activity android:name=".BattleActivity" />
         <activity android:name=".OptionActivity" />
-        <activity android:name=".Mypage01Activity"></activity>
+
+        <activity android:name=".mypage.Mypage01Activity"></activity>
+        <activity
+            android:name=".mypage.MypagePopup"
+            android:theme="@android:style/Theme.Material.Light.Dialog">
+            <intent-filter>
+                <action android:name="org.neulboworld.airmouse.intentfilter.mypagepopup" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".mypage.MypageEquip"
+            android:theme="@android:style/Theme.Material.Light.Dialog">
+            <intent-filter>
+                <action android:name="org.neulboworld.airmouse.intentfilter.mypageequip" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

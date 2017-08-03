@@ -4,24 +4,65 @@
     android:id="@+id/charexlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="10">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <Button
+        android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/cr_swordman" />
+        android:text="Level up"
+        android:onClick="chexlvup"
+        android:layout_weight="0.5"/>
 
-    <EditText
-        android:id="@+id/editText3"
+    <TextView
+        android:id="@+id/chex01"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:ems="10"
-        android:gravity="left"
-        android:inputType="textMultiLine"
-        android:text="Name:
-Attack:
-Defence:
-Range:" />
+        android:layout_height="wrap_content"
+        android:text="Name :"
+        android:layout_weight="0.5"/>
+
+    <TextView
+        android:id="@+id/chex02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Level : 1"
+        android:layout_weight="0.5"/>
+
+    <TextView
+        android:id="@+id/chex03"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Attack :"
+        android:layout_weight="0.5"/>
+
+    <TextView
+        android:id="@+id/chex04"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Defence :"
+        android:layout_weight="0.5"/>
+
+    <TextView
+        android:id="@+id/chex05"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Range :"
+        android:layout_weight="0.5"/>
+
+    <TextView
+        android:id="@+id/chex06"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Story :"
+        android:layout_weight="4"/>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Equip"
+        android:onClick="ChExEquipbt"
+        android:layout_weight="2"/>
 
 </LinearLayout>
