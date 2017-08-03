@@ -67,7 +67,7 @@ public class Mypage01Activity extends AppCompatActivity {
         select4.add(new Character(R.drawable.emptychar, "공백"));
         select4.add(new Character(R.drawable.emptychar, "공백"));
         select4.add(new Character(R.drawable.emptychar, "공백"));
-        adapter = new MypageAdapter(characters, choice, select1);
+        adapter = new MypageAdapter(characters, choice, select1,Level);
         recyclerView = (RecyclerView) findViewById(R.id.recycleview);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 4));
         recyclerView.setAdapter(adapter);
@@ -84,7 +84,7 @@ public class Mypage01Activity extends AppCompatActivity {
 
     public void onClick01(View v) {
         choice = 1;
-        adapter = new MypageAdapter(characters, choice, select1);
+        adapter = new MypageAdapter(characters, choice, select1,Level);
         recyclerView = (RecyclerView) findViewById(R.id.recycleview);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 4));
         recyclerView.setAdapter(adapter);
@@ -105,7 +105,7 @@ public class Mypage01Activity extends AppCompatActivity {
 
     public void onClick02(View v) {
         choice=2;
-        adapter = new MypageAdapter(characters, choice, select2);
+        adapter = new MypageAdapter(characters, choice, select2,Level);
         recyclerView = (RecyclerView) findViewById(R.id.recycleview);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 4));
         recyclerView.setAdapter(adapter);
@@ -124,7 +124,7 @@ public class Mypage01Activity extends AppCompatActivity {
     }
     public void onClick03(View v) {
         choice=3;
-        adapter = new MypageAdapter(characters, choice, select3);
+        adapter = new MypageAdapter(characters, choice, select3,Level);
         recyclerView = (RecyclerView) findViewById(R.id.recycleview);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 4));
         recyclerView.setAdapter(adapter);
@@ -144,7 +144,7 @@ public class Mypage01Activity extends AppCompatActivity {
 
     public void onClick04(View v) {
         choice=4;
-        adapter = new MypageAdapter(characters, choice, select4);
+        adapter = new MypageAdapter(characters, choice, select4,Level);
         recyclerView = (RecyclerView) findViewById(R.id.recycleview);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 4));
         recyclerView.setAdapter(adapter);
@@ -181,14 +181,14 @@ public class Mypage01Activity extends AppCompatActivity {
                         iv5.setImageResource(select1.get(4).image);
                         ImageView iv6 = (ImageView)findViewById(R.id.mpch06);
                         iv6.setImageResource(select1.get(5).image);
-                        adapter = new MypageAdapter(characters, choice, select1);
+                        adapter = new MypageAdapter(characters, choice, select1,Level);
                         recyclerView = (RecyclerView) findViewById(R.id.recycleview);
                         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 4));
                         recyclerView.setAdapter(adapter);
                     }
                     else if(choice==2){
                         select2=char01;
-                        adapter = new MypageAdapter(characters, choice, select2);
+                        adapter = new MypageAdapter(characters, choice, select2,Level);
                         recyclerView = (RecyclerView) findViewById(R.id.recycleview);
                         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 4));
                         recyclerView.setAdapter(adapter);
@@ -207,7 +207,7 @@ public class Mypage01Activity extends AppCompatActivity {
                     }
                     else if(choice==3){
                         select3=char01;
-                        adapter = new MypageAdapter(characters, choice, select3);
+                        adapter = new MypageAdapter(characters, choice, select3,Level);
                         recyclerView = (RecyclerView) findViewById(R.id.recycleview);
                         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 4));
                         recyclerView.setAdapter(adapter);
@@ -226,7 +226,7 @@ public class Mypage01Activity extends AppCompatActivity {
                     }
                     else{
                         select4=char01;
-                        adapter = new MypageAdapter(characters, choice, select4);
+                        adapter = new MypageAdapter(characters, choice, select4,Level);
                         recyclerView = (RecyclerView) findViewById(R.id.recycleview);
                         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 4));
                         recyclerView.setAdapter(adapter);

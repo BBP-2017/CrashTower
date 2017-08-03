@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.bbp.crashtower.model.Character;
 import com.bbp.crashtower.mypage.Mypage01Activity;
+import com.bbp.crashtower.result.SingleResult;
 
 import java.util.ArrayList;
 
@@ -54,6 +55,10 @@ public class MainActivity extends BaseActivity {
                 i.putExtra("ID",ID);
                 i.putExtra("LEVEL",Level);
                 startActivityForResult(i,1);
+                break;
+            case R.id.testBT:
+                Intent i1=new Intent(getApplicationContext(),SingleResult.class);
+                startActivity(i1);
                 break;
             default:
                 break;

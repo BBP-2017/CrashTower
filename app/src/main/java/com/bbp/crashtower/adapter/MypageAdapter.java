@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bbp.crashtower.R;
 import com.bbp.crashtower.model.Character;
@@ -23,12 +24,13 @@ import java.util.ArrayList;
 
 public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder>  {
     ArrayList<Character> characters,select;
-
+    int userlever;
     int choice;
-    public MypageAdapter(ArrayList<Character> characters,int choice,ArrayList<Character> select) {
+    public MypageAdapter(ArrayList<Character> characters,int choice,ArrayList<Character> select,int uerlever) {
         this.characters = characters;
         this.choice=choice;
         this.select=select;
+        this.userlever=uerlever;
     }
 
     @Override
@@ -43,18 +45,28 @@ public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder
 
         holder.tvName.setText(characters.get(position).name);
         holder.ivImage.setImageResource(characters.get(position).image);
-
-        holder.ivImage.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v)  {
-                Character char01= characters.get(position);
-                Context context = v.getContext();
-                Intent intent = new Intent(context.getApplicationContext(), MypagePopup.class);
-                intent.putExtra("CHAR",char01 );
-                intent.putExtra("Choicech",select);
-                ((Activity)context).startActivityForResult(intent,0);
-            }
-        });
+if(characters.get(position).restriction<=userlever) {
+    holder.ivImage.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Character char01 = characters.get(position);
+            Context context = v.getContext();
+            Intent intent = new Intent(context.getApplicationContext(), MypagePopup.class);
+            intent.putExtra("CHAR", char01);
+            intent.putExtra("Choicech", select);
+            ((Activity) context).startActivityForResult(intent, 0);
+        }
+    });
+}else{
+    holder.ivImage.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Context context = v.getContext();
+            Toast toast = Toast.makeText(context.getApplicationContext(), "UESR LEVEL이 낮습니다.", Toast.LENGTH_LONG);
+            toast.show();
+        }
+    });
+}
     }
     /*
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
