@@ -1,4 +1,4 @@
-package com.bbp.crashtower;
+package com.bbp.crashtower.activity;
 
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -9,6 +9,8 @@ import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ToggleButton;
+
+import com.bbp.crashtower.R;
 
 /**
  * Created by HanGyuLee on 2017-07-12.

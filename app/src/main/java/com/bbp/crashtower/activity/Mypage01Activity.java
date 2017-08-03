@@ -1,4 +1,4 @@
-package com.bbp.crashtower.mypage;
+package com.bbp.crashtower.activity;
 
 
 import android.content.Intent;

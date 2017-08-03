@@ -1,17 +1,17 @@
 
 
-package com.bbp.crashtower;
+package com.bbp.crashtower.activity;
 
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+
+import com.bbp.crashtower.R;
 import com.bbp.crashtower.model.Character;
-import com.bbp.crashtower.mypage.Mypage01Activity;
 
 import java.util.ArrayList;
 

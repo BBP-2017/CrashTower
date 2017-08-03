@@ -1,8 +1,10 @@
-package com.bbp.crashtower.adapter;
+package com.bbp.crashtower;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
+
+import com.bbp.crashtower.listener.ItemTouchHelperListener;
 
 import static android.content.ContentValues.TAG;
 

@@ -1,10 +1,13 @@
 package com.bbp.crashtower.view;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Message;
 import android.view.MotionEvent;
@@ -12,86 +15,81 @@ import android.view.View;
 
 import com.bbp.crashtower.R;
 
-import com.bbp.crashtower.model.Mob;
+import com.bbp.crashtower.data.CardInfo;
+import com.bbp.crashtower.model.Tower;
+import com.bbp.crashtower.model.Unit;
 
 /**
  * Created by dongbin on 2017-07-18.
  */
 
-public class BattleGroundView extends View{
+public class BattleGroundView extends View {
 
-    int displayLeft, displayTop, displayRight, displayBottom;
+    static final int PADDING_BG = 50, MAX_UNITS = 5;
+
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+
+    Rect displayRect;
 
     Paint paint;
 
-    Bitmap backgroundBitmap, mob1_Bitmap, mob2_Bitmap, mob3_Bitmap;
+    Bitmap backgroundBitmap;
 
-    Mob mob1_1, mob2_1, mob3_1;
+    Unit[] units = new Unit[MAX_UNITS+1];
+
+    Tower tower1;
+
+    boolean gameOver;
+
+
 
     //초기화 영역
-    public BattleGroundView(Context context){
+    public BattleGroundView(Context context, SharedPreferences pref) {
         super(context);
+
+        this.pref = pref;
+        editor = pref.edit();
 
         paint = new Paint();
 
-        mHandler.sendEmptyMessageDelayed(0,100);     // Handler 호출
+        mHandler.sendEmptyMessageDelayed(0, 100);     // Handler 호출
     }
+
+
+    // Timer Handler
+    Handler mHandler = new Handler() {
+        public void handleMessage(Message msg) {
+
+            invalidate();   // View를 다시 그림
+
+            for (int i = 1; i <= MAX_UNITS; i++) {
+                Unit unit = units[i];
+                if (unit != null) {
+                    restrictUnits(unit);
+                    detectedUnits(unit); // Unit 감지 처리
+                }
+            }
+
+            if(gameOver){
+                // result 브랜치에서 구현
+            }
+
+            mHandler.sendEmptyMessageDelayed(0, 100);
+        }
+    };
+
+
 
     // view가 layout에 적용됬을때 호출됨
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
 
-        displayLeft = left;
-        displayRight = right;
-        displayTop = top;
-        displayBottom = bottom;
+        displayRect = new Rect(left+PADDING_BG, top+PADDING_BG, right-PADDING_BG, bottom-PADDING_BG);
 
-        backgroundBitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.battle_ground);
-
-        mob1_Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.baba);
-        mob2_Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.pekka);
-        mob3_Bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.bone);
-
-        backgroundBitmap = Bitmap.createScaledBitmap(backgroundBitmap, displayRight, displayBottom, true);
-        mob1_Bitmap = Bitmap.createScaledBitmap(mob1_Bitmap, mob1_Bitmap.getWidth()/2 , mob1_Bitmap.getHeight()/2, true);
-        mob3_Bitmap = Bitmap.createScaledBitmap(mob3_Bitmap, mob3_Bitmap.getWidth()/3, mob3_Bitmap.getHeight()/3, true);
-
-        mob1_1 = new Mob(1,mob1_Bitmap.getWidth() / 2,mob1_Bitmap.getHeight() / 2,1500,1000,30,30);
-        mob2_1 = new Mob(2,mob2_Bitmap.getWidth() / 2,mob2_Bitmap.getHeight() / 2,500,1000,-10,-10);
-        mob3_1 = new Mob(3,mob3_Bitmap.getWidth() / 2,mob3_Bitmap.getHeight() / 2,1000,500,-200,200);
-
-        ////
-
-        new Thread(mob1_1).start();
-        new Thread(mob2_1).start();
-        new Thread(mob3_1).start();
-
-    }
-
-    // Timer Handler
-    Handler mHandler = new Handler(){
-        public void handleMessage(Message msg){
-
-            invalidate();   // View를 다시 그림
-            mHandler.sendEmptyMessageDelayed(0,100);
-        }
-    };
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if(event.getAction() == MotionEvent.ACTION_DOWN){
-            int x = (int)event.getX();
-            int y = (int)event.getY();
-
-            // 터치범위 제한
-            int restrict = mob3_1.getRw()*2;
-
-            if((x > displayLeft+restrict && x < displayRight-restrict) && (y > displayTop+restrict && y < displayBottom-restrict) )
-                mob3_1.setTarget(x,y);
-        }
-
-        return super.onTouchEvent(event);
+        backgroundBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.battle_ground);
+        backgroundBitmap = Bitmap.createScaledBitmap(backgroundBitmap, right, bottom, true);
     }
 
     // 그림그리는 영역
@@ -99,35 +97,68 @@ public class BattleGroundView extends View{
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawBitmap(backgroundBitmap, 0, 0,paint);
+        canvas.drawBitmap(backgroundBitmap, 0, 0, null);
 
-        restrictMob(mob1_1);
-        restrictMob(mob2_1);
-        restrictMob(mob3_1);
+        paint.setColor(Color.RED);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(10);
 
-        canvas.drawBitmap(mob1_Bitmap, mob1_1.getX()- mob1_1.getRw(), mob1_1.gety() - mob1_1.getRh(),null);
-        canvas.drawBitmap(mob2_Bitmap, mob2_1.getX()- mob2_1.getRw(), mob2_1.gety() - mob2_1.getRh(),null);
-        canvas.drawBitmap(mob3_Bitmap, mob3_1.getX()- mob3_1.getRw(), mob3_1.gety() - mob3_1.getRh(),null);
+        for (int i = 1; i <= MAX_UNITS; i++) {
+            Unit unit = units[i];
+            if(unit!=null) {
+
+                canvas.drawRect(unit.getSensor(), paint);
+                canvas.drawBitmap(unit.getBitmap(), unit.getBody().left, unit.getBody().top, null);
+            }
+        }
+
+
+    }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            int x = (int) event.getX();
+            int y = (int) event.getY();
+
+            int id = pref.getInt("cardID",0);
+            int level = 1;
+            if(id!=0){
+                setUnits(id,id,level,x,y);
+
+                editor.putInt("cardID",0);
+                editor.commit();
+            }
+        }
+        return super.onTouchEvent(event);
+    }
+
+    void restrictUnits(Unit unit){
+
+        if (displayRect.left > unit.getBody().left || displayRect.right < unit.getBody().right) {
+            unit.changeDirDx();
+        }
+        if (displayRect.top > unit.getBody().top || displayRect.bottom < unit.getBody().bottom) {
+            unit.changeDirDy();
+        }
+    }
+
+    void  detectedUnits(Unit unit){
+
+        for (int i = 1; i <= MAX_UNITS ; i++) {
+            Unit targetUnit = units[i];
+            if(targetUnit == null) continue;
+            if(unit==targetUnit) continue;
+            if(unit.getSensor().contains(targetUnit.getBody().centerX(),targetUnit.getBody().centerY())){
+                targetUnit.backMpve();
+            }
+        }
+    }
+
+    void setUnits(int threadIdx,int cardID, int level, int x, int y){
+
+        units[threadIdx] = new Unit(new CardInfo(getContext(),cardID,level),x,y);
+        units[threadIdx].start();
 
     }
 
-    // mob들 제한 구역 설정
-    public void restrictMob(Mob mob){
-        if(mob.getX() <  displayLeft + mob.getRw()){
-            mob.setX(displayLeft + mob.getRw());
-            mob.setDirSx();
-        }
-        if(mob.getX() > displayRight - mob.getRw()){
-            mob.setX(displayRight - mob.getRw());
-            mob.setDirSx();
-        }
-        if(mob.gety() <  displayTop + mob.getRh()){
-            mob.setY(displayTop + mob.getRh());
-            mob.setDirSy();
-        }
-        if(mob.gety() > displayBottom - mob.getRh()){
-            mob.setY(displayBottom - mob.getRh());
-            mob.setDirSy();
-        }
-    }
 }

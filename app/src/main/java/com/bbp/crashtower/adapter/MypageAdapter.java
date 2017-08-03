@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.bbp.crashtower.R;
 import com.bbp.crashtower.model.Character;
-import com.bbp.crashtower.mypage.MypagePopup;
+import com.bbp.crashtower.activity.MypagePopup;
 
 import java.util.ArrayList;
 
@@ -57,14 +57,14 @@ public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder
         });
     }
     /*
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-     //   super.onActivityResult(0, resultCode, data);
+    public void onActivityResult(int requestCode, int resultCode, Intent com.bbp.crashtower.data) {
+     //   super.onActivityResult(0, resultCode, com.bbp.crashtower.data);
         if(requestCode==0) {
             switch (resultCode) {
                 case 1:
 
                     Intent intent = new Intent();
-                    ArrayList<Character> char01 = (ArrayList<Character>) data.getSerializableExtra("Rechar");
+                    ArrayList<Character> char01 = (ArrayList<Character>) com.bbp.crashtower.data.getSerializableExtra("Rechar");
                     intent.putExtra("Rechar", char01);
                      setResult(1, intent);
                     finish();

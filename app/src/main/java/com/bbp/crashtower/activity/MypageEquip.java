@@ -1,4 +1,4 @@
-package com.bbp.crashtower.mypage;
+package com.bbp.crashtower.activity;
 
 /**
  * Created by roto1 on 2017-07-28.

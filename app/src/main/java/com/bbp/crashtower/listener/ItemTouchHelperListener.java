@@ -1,4 +1,4 @@
-package com.bbp.crashtower.adapter;
+package com.bbp.crashtower.listener;
 
 public interface ItemTouchHelperListener {
     boolean onItemMove(int fromPosition, int toPosition);
