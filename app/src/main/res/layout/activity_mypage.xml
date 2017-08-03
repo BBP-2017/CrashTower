@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context="com.bbp.crashtower.activity.Mypage01Activity">
+    tools:context="com.bbp.crashtower.activity.MypageActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycleview"
@@ -27,7 +27,7 @@
 
         <ImageView
             android:id="@+id/mpch01"
-            android:layout_width="1dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:visibility="visible"
@@ -35,7 +35,7 @@
 
         <ImageView
             android:id="@+id/mpch02"
-            android:layout_width="1dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:visibility="visible"
@@ -43,7 +43,7 @@
 
         <ImageView
             android:id="@+id/mpch03"
-            android:layout_width="1dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:visibility="visible"
@@ -51,7 +51,7 @@
 
         <ImageView
             android:id="@+id/mpch04"
-            android:layout_width="1dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:visibility="visible"
@@ -59,7 +59,7 @@
 
         <ImageView
             android:id="@+id/mpch05"
-            android:layout_width="1dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:visibility="visible"
@@ -67,7 +67,7 @@
 
         <ImageView
             android:id="@+id/mpch06"
-            android:layout_width="1dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:visibility="visible"
@@ -82,35 +82,31 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button01"
+            android:id="@+id/btn_mypage_deck1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="onClick01"
             android:text="1Party" />
 
         <Button
-            android:id="@+id/button02"
+            android:id="@+id/btn_mypage_deck2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="onClick02"
             android:text="2Party" />
 
         <Button
-            android:id="@+id/button03"
+            android:id="@+id/btn_mypage_deck3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="onClick03"
             android:text="3party" />
 
         <Button
-            android:id="@+id/button04"
+            android:id="@+id/btn_mypage_deck4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="onClick04"
             android:text="4Party" />
     </LinearLayout>
 </LinearLayout>

@@ -19,7 +19,8 @@
         <activity android:name=".activity.BattleActivity" />
         <activity android:name=".activity.OptionActivity" />
 
-        <activity android:name=".activity.Mypage01Activity"></activity>
+        <activity android:name=".activity.MypageActivity"></activity>
+
         <activity
             android:name=".activity.MypagePopup"
             android:theme="@android:style/Theme.Material.Light.Dialog">
@@ -28,6 +29,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity.MypageEquip"
             android:theme="@android:style/Theme.Material.Light.Dialog">

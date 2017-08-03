@@ -53,8 +53,8 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(this, OptionActivity.class));
                 break;
             case  R.id.btn_mypage:
-                startActivity(new Intent(getApplicationContext(), Mypage01Activity.class));
-                Intent i=new Intent(getApplicationContext(),Mypage01Activity.class);
+                startActivity(new Intent(getApplicationContext(), MypageActivity.class));
+                Intent i=new Intent(getApplicationContext(),MypageActivity.class);
                 i.putExtra("ID",ID);
                 i.putExtra("LEVEL",Level);
                 startActivityForResult(i,1);
