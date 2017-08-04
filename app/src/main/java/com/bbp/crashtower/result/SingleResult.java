@@ -5,8 +5,11 @@ package com.bbp.crashtower.result;
  */
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Display;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -14,13 +17,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bbp.crashtower.R;
+import com.bbp.crashtower.mypage.Mypage01Activity;
 
 
-public class SingleResult extends Activity {
+public class SingleResult extends Activity  {
     private String UserID;
     private int UserLevel,getExp,getGold,presentExp,presentGold,totalGold;
     private Boolean isitWin;
 
+    Mypage01Activity AActivity = (Mypage01Activity)Mypage01Activity.AActivity; //강제종료1
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,45 +44,73 @@ public class SingleResult extends Activity {
         layoutParams.flags= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
 //뿌연 효과 정도
         layoutParams.dimAmount= 0.3f;
-        layoutParams.height=layoutParams.MATCH_PARENT;
-        layoutParams.width=layoutParams.MATCH_PARENT;
+
+        Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+
+        int width = (int) (display.getWidth() * 0.95); //Display 사이즈의 70%
+        int height = (int) (display.getHeight() * 0.95);  //Display 사이즈의 90%
+
+
+       // layoutParams.height=layoutParams.MATCH_PARENT;
+       // layoutParams.width=layoutParams.MATCH_PARENT;
+
 //적용
+
         getWindow().setAttributes(layoutParams);
         setContentView(R.layout.activity_singelresult);
+        getWindow().getAttributes().width = width;
+        getWindow().getAttributes().height = height;
+        Handler handler = new Handler();
         ProgressBar ExBar01 =(ProgressBar)findViewById(R.id.Exbar01);
-        ExBar01.incrementProgressBy(getExp);
+
+        for(int i=0;i<getExp;i++) {
+            ExBar01.incrementProgressBy(1);
+
+        }
+
         if(isitWin){
             ImageView i=(ImageView)findViewById(R.id.resultCrown1);
             i.setImageResource(R.drawable.crown);
-            Handler handler = new Handler();
+
             handler.postDelayed(new Runnable() {
                 public void run() {
                     ImageView i1=(ImageView)findViewById(R.id.resultCrown2);
                     i1.setImageResource(R.drawable.crown);
                 }
-            }, 1000);  // 2000은 2초를 의미합니다.
+            }, 300);  // 2000은 2초를 의미합니다.
             handler.postDelayed(new Runnable() {
                 public void run() {
                     ImageView i2=(ImageView)findViewById(R.id.resultCrown3);
                     i2.setImageResource(R.drawable.crown);
                 }
-            }, 1000);  // 2000은 2초를 의미합니다.
+            }, 600);
 
 
         }
         else{
             ImageView i=(ImageView)findViewById(R.id.resultCrown1);
             i.setImageResource(R.drawable.crown1);
-            ImageView i1=(ImageView)findViewById(R.id.resultCrown2);
-            i1.setImageResource(R.drawable.crown1);
-            ImageView i2=(ImageView)findViewById(R.id.resultCrown3);
-            i2.setImageResource(R.drawable.crown1);
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    ImageView i1=(ImageView)findViewById(R.id.resultCrown2);
+                    i1.setImageResource(R.drawable.crown1);
+                }
+            }, 300);  // 2000은 2초를 의미합니다.
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    ImageView i2=(ImageView)findViewById(R.id.resultCrown3);
+                    i2.setImageResource(R.drawable.crown1);
+                }
+            }, 600);
         }
         TextView tvResult=(TextView)findViewById(R.id.tvResult01);
         tvResult.setText(UserID+"\nLevel :"+UserLevel+"\nEXP : "+presentExp+" + "+getExp+"\nGOLD : "+presentGold+" + "+getGold);
         totalGold=presentGold+getGold;
 
-
+    }
+    public void ResultExBT01(View v){
+        finish();
+        AActivity.finish(); //강제종료2
 
     }
 }

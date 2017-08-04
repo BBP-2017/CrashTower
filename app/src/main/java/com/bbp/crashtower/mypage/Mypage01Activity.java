@@ -1,6 +1,7 @@
 package com.bbp.crashtower.mypage;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,10 +14,13 @@ import android.widget.LinearLayout;
 import com.bbp.crashtower.R;
 import com.bbp.crashtower.adapter.MypageAdapter;
 import com.bbp.crashtower.model.Character;
+import com.bbp.crashtower.result.SingleResult;
 
 import java.util.ArrayList;
 
 public class Mypage01Activity extends AppCompatActivity {
+    public static Activity AActivity;   //강제종료1
+
     private RecyclerView recyclerView;
     private MypageAdapter adapter;
     private int choice = 1; //어떤 파티를 선택하였는가 정하는것
@@ -30,6 +34,7 @@ public class Mypage01Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AActivity = Mypage01Activity.this;  //강제종료2
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         Level = intent.getIntExtra("LEVEL",1);
@@ -143,6 +148,7 @@ public class Mypage01Activity extends AppCompatActivity {
     }
 
     public void onClick04(View v) {
+        /*
         choice=4;
         adapter = new MypageAdapter(characters, choice, select4,Level);
         recyclerView = (RecyclerView) findViewById(R.id.recycleview);
@@ -159,7 +165,9 @@ public class Mypage01Activity extends AppCompatActivity {
         ImageView iv5 = (ImageView)findViewById(R.id.mpch05);
         iv5.setImageResource(select4.get(4).image);
         ImageView iv6 = (ImageView)findViewById(R.id.mpch06);
-        iv6.setImageResource(select4.get(5).image);
+        iv6.setImageResource(select4.get(5).image);*/
+        Intent i1=new Intent(getApplicationContext(),SingleResult.class);
+        startActivity(i1);
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
            super.onActivityResult(requestCode, resultCode, data);

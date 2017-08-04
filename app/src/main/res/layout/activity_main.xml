@@ -54,18 +54,5 @@
 
     </android.support.v7.widget.LinearLayoutCompat>
 
-    <Button
-        android:id="@+id/testBT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        android:onClick="onClick"
-        tools:layout_constraintBottom_creator="1"
-        android:layout_marginStart="46dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="41dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
 
 </android.support.constraint.ConstraintLayout>
