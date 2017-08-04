@@ -154,7 +154,7 @@ public class MypageActivity extends AppCompatActivity implements View.OnClickLis
                 iv[i] = (ImageView) findViewById(ivID[i]);
                 iv[i].setImageResource(deck[choice].get(i).image);
             }
-            Log.d("abc","################################################choiced");
+
 
     }
 }
