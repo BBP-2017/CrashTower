@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bbp.crashtower.R;
-import com.bbp.crashtower.model.Character;
+import com.bbp.crashtower.model.Card;
 import com.bbp.crashtower.activity.MypagePopup;
 
 import java.util.ArrayList;
@@ -22,11 +22,11 @@ import java.util.ArrayList;
  */
 
 public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder>  {
-    ArrayList<Character> characters,select;
+    ArrayList<Card> cards,select;
 
     int choice;
-    public MypageAdapter(ArrayList<Character> characters,int choice,ArrayList<Character> select) {
-        this.characters = characters;
+    public MypageAdapter(ArrayList<Card> cards, int choice, ArrayList<Card> select) {
+        this.cards = cards;
         this.choice=choice;
         this.select=select;
     }
@@ -41,13 +41,13 @@ public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {  //필수 메소드 2: ListView에서 getView 부분을 담당하는 메소드
 
-        holder.tvName.setText(characters.get(position).name);
-        holder.ivImage.setImageResource(characters.get(position).image);
+        holder.tvName.setText(cards.get(position).name);
+        holder.ivImage.setImageResource(cards.get(position).image);
 
         holder.ivImage.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v)  {
-                Character char01= characters.get(position);
+                Card char01= cards.get(position);
                 Context context = v.getContext();
                 Intent intent = new Intent(context.getApplicationContext(), MypagePopup.class);
                 intent.putExtra("CHAR",char01 );
@@ -64,7 +64,7 @@ public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder
                 case 1:
 
                     Intent intent = new Intent();
-                    ArrayList<Character> char01 = (ArrayList<Character>) com.bbp.crashtower.data.getSerializableExtra("Rechar");
+                    ArrayList<Card> char01 = (ArrayList<Card>) com.bbp.crashtower.data.getSerializableExtra("Rechar");
                     intent.putExtra("Rechar", char01);
                      setResult(1, intent);
                     finish();
@@ -79,7 +79,7 @@ public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder
 
     @Override                                           //필수 메소드3
     public int getItemCount() {
-        return characters.size();
+        return cards.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

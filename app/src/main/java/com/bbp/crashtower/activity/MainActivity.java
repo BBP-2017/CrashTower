@@ -11,13 +11,13 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import com.bbp.crashtower.R;
-import com.bbp.crashtower.model.Character;
+import com.bbp.crashtower.model.Card;
 
 import java.util.ArrayList;
 
 
 public class MainActivity extends BaseActivity {
-        ArrayList<Character> character;
+        ArrayList<Card> card;
         String ID;
         int Level;
         int EXP;

@@ -13,19 +13,19 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 
 import com.bbp.crashtower.R;
-import com.bbp.crashtower.model.Character;
+import com.bbp.crashtower.model.Card;
 
 import java.util.ArrayList;
 
 
 public class MypageEquip extends Activity {
-    Character char02;
-    ArrayList<Character> select;
+    Card char02;
+    ArrayList<Card> select;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
-        char02 = (Character) intent.getSerializableExtra("EQUIP");
-        select=(ArrayList<Character>) intent.getSerializableExtra("Equipch");
+        char02 = (Card) intent.getSerializableExtra("EQUIP");
+        select=(ArrayList<Card>) intent.getSerializableExtra("Equipch");
         super.onCreate(savedInstanceState);
 //TITLE바 NONONO.
         requestWindowFeature(Window.FEATURE_NO_TITLE);

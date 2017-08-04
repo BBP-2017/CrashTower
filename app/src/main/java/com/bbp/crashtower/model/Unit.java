@@ -13,7 +13,7 @@ public class Unit extends Thread{
 
     int dx, dy, width, height;
 
-    int moveSpeed, maxHp,power,sensorRange;
+    int moveSpeed, maxHp,power,sensorRange,attackSpeed;
 
     boolean targetOn, moveOn = true;
 
@@ -60,6 +60,7 @@ public class Unit extends Thread{
         maxHp = info.maxHp;
         power = info.power;
         moveSpeed = info.moveSpeed;
+        attackSpeed = info.attackSpeed;
         dx = info.dir * info.moveSpeed;
         dy = info.dir * info.moveSpeed;
         sensorRange = info.sensorRange;

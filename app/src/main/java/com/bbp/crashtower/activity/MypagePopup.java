@@ -14,19 +14,19 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.bbp.crashtower.R;
-import com.bbp.crashtower.model.Character;
+import com.bbp.crashtower.model.Card;
 
 import java.util.ArrayList;
 
 
 public class MypagePopup extends Activity {
-    Character char01;
-    ArrayList<Character> select;
+    Card char01;
+    ArrayList<Card> select;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
-        char01 = (Character) intent.getSerializableExtra("CHAR");
-        select=(ArrayList<Character>) intent.getSerializableExtra("Choicech");
+        char01 = (Card) intent.getSerializableExtra("CHAR");
+        select=(ArrayList<Card>) intent.getSerializableExtra("Choicech");
         super.onCreate(savedInstanceState);
 //TITLE바 NONONO.
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -53,7 +53,7 @@ public class MypagePopup extends Activity {
         switch (resultCode) {
             case 1:
                 Intent intent = new Intent();
-                ArrayList<Character> Reselect=(ArrayList<Character>) data.getSerializableExtra("Rechar");
+                ArrayList<Card> Reselect=(ArrayList<Card>) data.getSerializableExtra("Rechar");
                 intent.putExtra("Rechar", Reselect);
                 setResult(1, intent);
                 finish();

@@ -19,6 +19,8 @@ public class CardInfo{
 
     public int dir;
 
+    public String name;
+
     public Rect body, sensor;
 
     public Bitmap bitmap;
@@ -33,12 +35,72 @@ public class CardInfo{
     void setStack(Context context){
         switch (cardID){
             case 1:
+                name = "검사";
                 switch (level){
                     default:
                         width = 100;
                         height = 100;
                         maxHp = 200;
-                        damage = 0;
+                        power = 20;
+                        moveSpeed = 20;
+                        attackSpeed = 20;
+                        dir = 1;
+                        resID =  R.drawable.cr_swordman;
+                        break;
+                }
+            break;
+            case 2:
+                name = "기마병";
+                switch (level){
+                    default:
+                        width = 100;
+                        height = 100;
+                        maxHp = 300;
+                        power = 20;
+                        moveSpeed = 30;
+                        attackSpeed = 20;
+                        dir = 1;
+                        resID =  R.drawable.cr_cavalry;
+                        break;
+                }
+                break;
+            case 3:
+                name = "자이언트";
+                switch (level){
+                    default:
+                        width = 200;
+                        height = 200;
+                        maxHp = 600;
+                        power = 40;
+                        moveSpeed = 10;
+                        attackSpeed = 10;
+                        dir = -1;
+                        resID =  R.drawable.ccr_giant;
+                        break;
+                }
+                break;
+            case 4:
+                name = "아처";
+                switch (level){
+                    default:
+                        width = 100;
+                        height = 100;
+                        maxHp = 200;
+                        power = 20;
+                        moveSpeed = 20;
+                        attackSpeed = 20;
+                        dir = 1;
+                        resID =  R.drawable.cr_archer;
+                        break;
+                }
+                break;
+            case 5:
+                name = "바바리안";
+                switch (level){
+                    default:
+                        width = 100;
+                        height = 100;
+                        maxHp = 200;
                         power = 20;
                         moveSpeed = 20;
                         attackSpeed = 20;
@@ -46,15 +108,15 @@ public class CardInfo{
                         resID =  R.drawable.baba;
                         break;
                 }
-            break;
-            case 2:
+                break;
+            case 6:
+                name = "P.E.K.K.A";
                 switch (level){
                     default:
                         width = 200;
                         height = 200;
                         maxHp = 400;
-                        damage = 0;
-                        power = 40;
+                        power = 70;
                         moveSpeed = 10;
                         attackSpeed = 10;
                         dir = -1;
@@ -62,20 +124,26 @@ public class CardInfo{
                         break;
                 }
                 break;
-            default:
+            case 7:
+                name = "해골병사";
                 switch (level){
                     default:
-                        width = 300;
-                        height = 400;
-                        maxHp = 1000;
-                        damage = 0;
-                        power = 20;
-                        moveSpeed = 0;
-                        attackSpeed = 10;
-                        dir = 0;
-                        resID = R.drawable.king_tower;
+                        width = 50;
+                        height = 50;
+                        maxHp = 100;
+                        power = 5;
+                        moveSpeed = 30;
+                        attackSpeed = 30;
+                        dir = -1;
+                        resID = R.drawable.bone;
                         break;
                 }
+                break;
+            default:
+                name = "공백";
+                width = 100;
+                height = 100;
+                resID = R.drawable.card_background;
                 break;
 
         }
