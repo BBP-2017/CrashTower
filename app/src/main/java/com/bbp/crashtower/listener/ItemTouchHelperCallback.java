@@ -1,4 +1,4 @@
-package com.bbp.crashtower;
+package com.bbp.crashtower.listener;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;

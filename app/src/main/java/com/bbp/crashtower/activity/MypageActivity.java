@@ -1,6 +1,7 @@
 package com.bbp.crashtower.activity;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,7 @@ public class MypageActivity extends AppCompatActivity implements View.OnClickLis
     private int choice = 1; //어떤 파티를 선택하였는가 정하는것
 
 
+
     private int Level;
     private String ID;
 
@@ -41,8 +43,11 @@ public class MypageActivity extends AppCompatActivity implements View.OnClickLis
     ArrayList<Card> cards = new ArrayList<Card>(MAX_DECK_CARD);
     ArrayList<Card>[] deck = new ArrayList[MAX_DECK];
 
+    public static Activity AActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AActivity = MypageActivity.this;
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
@@ -97,6 +102,7 @@ public class MypageActivity extends AppCompatActivity implements View.OnClickLis
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 2);
         ImageView iv = new ImageView(this);
         iv.setLayoutParams(layoutParams);
+
 
     }
 
