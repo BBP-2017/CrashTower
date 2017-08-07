@@ -12,13 +12,18 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.bbp.crashtower.R;
+import com.bbp.crashtower.model.Card;
 import com.bbp.crashtower.view.BattleGroundView;
 
 import com.bbp.crashtower.data.CardInfo;
 
+import java.util.ArrayList;
+
 public class BattleActivity extends BaseActivity implements View.OnClickListener{
 
     public static final String PREFS_NAME = "MyPrefsFile";
+
+    int displayWidth, displayHeight;
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
@@ -28,7 +33,7 @@ public class BattleActivity extends BaseActivity implements View.OnClickListener
 
     ImageButton iBtnCard1,iBtnCard2,iBtnCard3,iBtnCard4,iBtnCard5;
 
-    int displayWidth, displayHeight;
+    ArrayList<Card> deckInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +61,24 @@ public class BattleActivity extends BaseActivity implements View.OnClickListener
         iBtnCard4 = (ImageButton)findViewById(R.id.btn_battle_card_4);
         iBtnCard5 = (ImageButton)findViewById(R.id.btn_battle_card_5);
 
-        iBtnCard1.setBackgroundResource(new CardInfo(getApplicationContext(),1,1).resID);
-        iBtnCard2.setBackgroundResource(new CardInfo(getApplicationContext(),2,1).resID);
-        iBtnCard3.setBackgroundResource(new CardInfo(getApplicationContext(),3,1).resID);
-        iBtnCard4.setBackgroundResource(new CardInfo(getApplicationContext(),4,1).resID);
-        iBtnCard5.setBackgroundResource(new CardInfo(getApplicationContext(),5,1).resID);
+        if(CardInfo.curDecks!=null) {
+            deckInfo = CardInfo.curDecks[CardInfo.BattleDeckNum];
+        }
+
+        if(deckInfo!=null) {
+
+            iBtnCard1.setBackgroundResource(deckInfo.get(0).image);
+            iBtnCard2.setBackgroundResource(deckInfo.get(1).image);
+            iBtnCard3.setBackgroundResource(deckInfo.get(2).image);
+            iBtnCard4.setBackgroundResource(deckInfo.get(3).image);
+            iBtnCard5.setBackgroundResource(deckInfo.get(4).image);
+        }else{
+            iBtnCard1.setBackgroundResource(new CardInfo(getApplicationContext(), 1, 1).resID);
+            iBtnCard2.setBackgroundResource(new CardInfo(getApplicationContext(), 2, 1).resID);
+            iBtnCard3.setBackgroundResource(new CardInfo(getApplicationContext(), 3, 1).resID);
+            iBtnCard4.setBackgroundResource(new CardInfo(getApplicationContext(), 4, 1).resID);
+            iBtnCard5.setBackgroundResource(new CardInfo(getApplicationContext(), 5, 1).resID);
+        }
 
         iBtnCard1.setOnClickListener(this);
         iBtnCard2.setOnClickListener(this);
@@ -74,19 +92,39 @@ public class BattleActivity extends BaseActivity implements View.OnClickListener
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_battle_card_1:
-                editor.putInt("cardID",1);
+                if(deckInfo!=null) {
+                    editor.putInt("cardID", deckInfo.get(0).cardID);
+                }else {
+                    editor.putInt("cardID", 1);
+                }
                 break;
             case R.id.btn_battle_card_2:
-                editor.putInt("cardID",2);
+                if(deckInfo!=null) {
+                    editor.putInt("cardID", deckInfo.get(1).cardID);
+                }else {
+                    editor.putInt("cardID", 2);
+                }
                 break;
             case R.id.btn_battle_card_3:
-                editor.putInt("cardID",3);
+                if(deckInfo!=null) {
+                    editor.putInt("cardID", deckInfo.get(2).cardID);
+                }else {
+                    editor.putInt("cardID", 3);
+                }
                 break;
             case R.id.btn_battle_card_4:
-                editor.putInt("cardID",4);
+                if(deckInfo!=null) {
+                    editor.putInt("cardID", deckInfo.get(3).cardID);
+                }else {
+                    editor.putInt("cardID", 4);
+                }
                 break;
             case R.id.btn_battle_card_5:
-                editor.putInt("cardID",5);
+                if(deckInfo!=null) {
+                    editor.putInt("cardID", deckInfo.get(4).cardID);
+                }else {
+                    editor.putInt("cardID", 5);
+                }
                 break;
         }
         editor.commit();

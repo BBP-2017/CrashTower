@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 
 import com.bbp.crashtower.R;
 import com.bbp.crashtower.adapter.MypageAdapter;
+import com.bbp.crashtower.data.CardInfo;
 import com.bbp.crashtower.model.Card;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class MypageActivity extends AppCompatActivity implements View.OnClickLis
     static final int MAX_DECK = 4;
     static final int MAX_DECK_CARD = 6;
 
-    private int choice = 1; //어떤 파티를 선택하였는가 정하는것
+    private int choice = 0; //어떤 파티를 선택하였는가 정하는것
 
 
     private int Level;
@@ -39,7 +40,7 @@ public class MypageActivity extends AppCompatActivity implements View.OnClickLis
     Button btnDeck[] = new Button[MAX_DECK];
 
     ArrayList<Card> cards = new ArrayList<Card>(MAX_DECK_CARD);
-    ArrayList<Card>[] deck = new ArrayList[MAX_DECK];
+    ArrayList<Card>[] decks = new ArrayList[MAX_DECK];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,10 +73,14 @@ public class MypageActivity extends AppCompatActivity implements View.OnClickLis
         btnDeckID[3] = R.id.btn_mypage_deck4;
 
 
-        for (int i = 0; i < MAX_DECK ; i++) {
-            deck[i] = new ArrayList<Card>(MAX_DECK_CARD);
-            for (int j = 0; j < MAX_DECK_CARD ; j++) {
-                deck[i].add(new Card(getApplicationContext(),0,0));
+        if(CardInfo.curDecks!=null){
+            decks = CardInfo.curDecks;
+        }else {
+            for (int i = 0; i < MAX_DECK; i++) {
+                decks[i] = new ArrayList<Card>(MAX_DECK_CARD);
+                for (int j = 0; j < MAX_DECK_CARD; j++) {
+                    decks[i].add(new Card(getApplicationContext(), 0, 0));
+                }
             }
         }
 
@@ -85,7 +90,7 @@ public class MypageActivity extends AppCompatActivity implements View.OnClickLis
             btnDeck[i].setOnClickListener(this);
         }
 
-        adapter = new MypageAdapter(cards, choice, deck[0]);
+        adapter = new MypageAdapter(cards, choice, decks[0]);
         recyclerView = (RecyclerView) findViewById(R.id.recycleview);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), MAX_DECK));
         recyclerView.setAdapter(adapter);
@@ -104,19 +109,24 @@ public class MypageActivity extends AppCompatActivity implements View.OnClickLis
            super.onActivityResult(requestCode, resultCode, data);
             switch (resultCode){
                 case 1:
-                    deck[choice] = (ArrayList<Card>)data.getSerializableExtra("Rechar");
+                    decks[choice] = (ArrayList<Card>)data.getSerializableExtra("Rechar");
 
                     ImageView[] iv = new ImageView[MAX_DECK_CARD];
                     for (int i = 0; i < MAX_DECK_CARD ; i++) {
                         iv[i] = (ImageView) findViewById(ivID[i]);
-                        iv[i].setImageResource(deck[choice].get(i).image);
+                        iv[i].setImageResource(decks[choice].get(i).image);
                     }
-                    adapter = new MypageAdapter(cards, choice, deck[choice]);
+                    adapter = new MypageAdapter(cards, choice, decks[choice]);
                     recyclerView = (RecyclerView) findViewById(R.id.recycleview);
                     recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), MAX_DECK));
                     recyclerView.setAdapter(adapter);
 
                     //B의 신호를 받아 실행할 작업
+
+
+                    //static CardInfo의 decks 저장
+                    CardInfo.curDecks = decks;
+
                     break;
                 default:
                     break;
@@ -143,8 +153,10 @@ public class MypageActivity extends AppCompatActivity implements View.OnClickLis
                 return;
 
         }
+            //static CardInfo의 deckNum 저장
+            CardInfo.BattleDeckNum = choice;
 
-            adapter = new MypageAdapter(cards, choice, deck[choice]);
+            adapter = new MypageAdapter(cards, choice, decks[choice]);
             recyclerView = (RecyclerView) findViewById(R.id.recycleview);
             recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), MAX_DECK));
             recyclerView.setAdapter(adapter);
@@ -152,7 +164,7 @@ public class MypageActivity extends AppCompatActivity implements View.OnClickLis
             ImageView[] iv = new ImageView[MAX_DECK_CARD];
             for (int i = 0; i < MAX_DECK_CARD ; i++) {
                 iv[i] = (ImageView) findViewById(ivID[i]);
-                iv[i].setImageResource(deck[choice].get(i).image);
+                iv[i].setImageResource(decks[choice].get(i).image);
             }
 
 

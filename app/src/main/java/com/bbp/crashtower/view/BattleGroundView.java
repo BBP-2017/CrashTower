@@ -25,7 +25,7 @@ import com.bbp.crashtower.model.Unit;
 
 public class BattleGroundView extends View {
 
-    static final int PADDING_BG = 50, MAX_UNITS = 5;
+    static final int PADDING_BG = 50, MAX_UNITS = 6;
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;

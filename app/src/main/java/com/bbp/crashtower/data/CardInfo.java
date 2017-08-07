@@ -6,12 +6,18 @@ import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 
 import com.bbp.crashtower.R;
+import com.bbp.crashtower.model.Card;
+
+import java.util.ArrayList;
 
 /**
  * Created by dongbin on 2017-07-31.
  */
 
 public class CardInfo{
+
+    public static ArrayList<Card>[] curDecks;
+    public static int BattleDeckNum;
 
     public int cardID, level, width, height;
 
