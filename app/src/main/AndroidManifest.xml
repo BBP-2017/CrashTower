@@ -9,32 +9,35 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.BattleActivity" />
-        <activity android:name=".activity.OptionActivity" />
 
-        <activity android:name=".activity.MypageActivity"></activity>
+        <activity android:name=".activity.OptionActivity"
+            android:theme="@android:style/Theme.Material.Light.Dialog">
+        <intent-filter>
+            <action android:name="org.neulboworld.airmouse.intentfilter.mypagepopup" />
 
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter> </activity>
+
+
+        <activity android:name=".activity.MypageActivity" />
         <activity
             android:name=".activity.MypagePopup"
             android:theme="@android:style/Theme.Material.Light.Dialog">
             <intent-filter>
                 <action android:name="org.neulboworld.airmouse.intentfilter.mypagepopup" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.MypageEquip"
             android:theme="@android:style/Theme.Material.Light.Dialog">
             <intent-filter>
                 <action android:name="org.neulboworld.airmouse.intentfilter.mypageequip" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -43,7 +46,16 @@
             android:theme="@android:style/Theme.Material.Light.Dialog">
             <intent-filter>
                 <action android:name="org.neulboworld.airmouse.intentfilter.singleresult" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.LoadingActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>

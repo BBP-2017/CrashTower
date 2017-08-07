@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ToggleButton;
@@ -27,13 +28,22 @@ public class OptionActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
+//TITLE바 NONONO.
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_option);
+        WindowManager.LayoutParams layoutParams= new WindowManager.LayoutParams();
+//팝업 외부 뿌연 효과
+        layoutParams.flags= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+//뿌연 효과 정도
+        layoutParams.dimAmount= 0.7f;
+//적용
+        getWindow().setAttributes(layoutParams);
+
         idInput = (EditText)findViewById(R.id.emailInput);
         passwordInput = (EditText)findViewById(R.id.pwInput);
         autoLogin = (CheckBox)findViewById(R.id.checkBox);
-        stb = (ToggleButton)this.findViewById(R.id.soundBtn);
+        stb = (ToggleButton)findViewById(R.id.soundBtn);
+
+        setContentView(R.layout.activity_option);
     }
 
     public void onClick(View v){

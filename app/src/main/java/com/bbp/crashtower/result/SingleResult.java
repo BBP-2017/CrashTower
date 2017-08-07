@@ -36,8 +36,26 @@ public class SingleResult extends Activity  {
         getGold=500;
         presentGold=1000;
         presentExp=0;
-        getExp=40;
         isitWin=true;
+        if(isitWin) {
+            switch (UserLevel) {
+                case 1:
+                    getExp=50;
+                    break;
+                case 2:
+                    getExp=30;
+                    break;
+                case 3:
+                    getExp=20;
+                    break;
+                case 4:
+                    getExp=10;
+                    break;
+                default:
+                    getExp=5;
+                    break;
+            }
+        }
 //TITLE바 NONONO.
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         WindowManager.LayoutParams layoutParams= new WindowManager.LayoutParams();
@@ -62,12 +80,27 @@ public class SingleResult extends Activity  {
         getWindow().getAttributes().width = width;
         getWindow().getAttributes().height = height;
         Handler handler = new Handler();
-        ProgressBar ExBar01 =(ProgressBar)findViewById(R.id.Exbar01);
+        final ProgressBar ExBar01 =(ProgressBar)findViewById(R.id.Exbar01);
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() { // Thread 로 작업할 내용을 구현
+                for(int i=0;i<=getExp;i++) {
+                    if(i>80){
+                        i+=2;
+                    }
+                    else if(i>30){
+                        i+=5;
+                    }
+                    ExBar01.setProgress(presentExp+i);
+                    try {
+                        Thread.sleep(100); // 시간지연
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
-        for(int i=0;i<getExp;i++) {
-            ExBar01.incrementProgressBy(1);
-
-        }
+                }
+            }
+        });
 
         if(isitWin){
             ImageView i=(ImageView)findViewById(R.id.resultCrown1);
@@ -105,7 +138,7 @@ public class SingleResult extends Activity  {
             }, 600);
         }
         TextView tvResult=(TextView)findViewById(R.id.tvResult01);
-        tvResult.setText(UserID+"\nLevel :"+UserLevel+"\nEXP : "+presentExp+" + "+getExp+"\nGOLD : "+presentGold+" + "+getGold);
+        tvResult.setText(UserID+"\nLevel :"+UserLevel+"\nGOLD : "+presentGold+" + "+getGold);
         totalGold=presentGold+getGold;
 
     }

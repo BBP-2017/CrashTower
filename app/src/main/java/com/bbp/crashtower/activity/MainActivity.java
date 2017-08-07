@@ -12,7 +12,6 @@ import android.widget.Button;
 
 import com.bbp.crashtower.R;
 import com.bbp.crashtower.model.Card;
-
 import java.util.ArrayList;
 
 
@@ -21,12 +20,13 @@ public class MainActivity extends BaseActivity {
         String ID;
         int Level;
         int EXP;
+      //   LoadingActivity AActivity=(LoadingActivity)LoadingActivity.AActivity;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+       // AActivity.finish();
         super.onCreate(savedInstanceState);
-
         Level=1;
         ID="ROTO";
 
