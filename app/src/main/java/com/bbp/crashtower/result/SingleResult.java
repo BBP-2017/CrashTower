@@ -35,7 +35,7 @@ public class SingleResult extends Activity  {
         UserLevel=1;
         getGold=500;
         presentGold=1000;
-        presentExp=0;
+        presentExp=20;
         isitWin=true;
         if(isitWin) {
             switch (UserLevel) {
@@ -52,7 +52,7 @@ public class SingleResult extends Activity  {
                     getExp=10;
                     break;
                 default:
-                    getExp=5;
+                    getExp=6;
                     break;
             }
         }
@@ -84,16 +84,11 @@ public class SingleResult extends Activity  {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() { // Thread 로 작업할 내용을 구현
-                for(int i=0;i<=getExp;i++) {
-                    if(i>80){
-                        i+=2;
-                    }
-                    else if(i>30){
-                        i+=5;
-                    }
+                for(int i=0;i<=getExp;i+=2) {
+
                     ExBar01.setProgress(presentExp+i);
                     try {
-                        Thread.sleep(100); // 시간지연
+                        Thread.sleep(50); // 시간지연
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -101,6 +96,7 @@ public class SingleResult extends Activity  {
                 }
             }
         });
+        t.start(); // 쓰레드 시작
 
         if(isitWin){
             ImageView i=(ImageView)findViewById(R.id.resultCrown1);
@@ -138,7 +134,7 @@ public class SingleResult extends Activity  {
             }, 600);
         }
         TextView tvResult=(TextView)findViewById(R.id.tvResult01);
-        tvResult.setText(UserID+"\nLevel :"+UserLevel+"\nGOLD : "+presentGold+" + "+getGold);
+        tvResult.setText(UserID+"\nLevel :"+UserLevel+"\nEXP : "+presentExp+" + "+getExp+"\nGOLD : "+presentGold+" + "+getGold);
         totalGold=presentGold+getGold;
 
     }

@@ -27,7 +27,7 @@
         android:text="SOUND"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <ToggleButton
+    <!--<ToggleButton
         android:id="@+id/soundBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
         android:layout_marginTop="60dp"
         android:onClick="onClick"
         android:textOff="OFF"
-        android:textOn="ON" />
+        android:textOn="ON" />-->
 
     <Button
         android:id="@+id/btnClose"
@@ -97,6 +97,17 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="1dp"
         android:text="Remember ID" />
+
+    <SeekBar
+        android:id="@+id/optionseekbar"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/emailInput"
+        android:layout_alignEnd="@+id/emailInput"
+        android:layout_alignTop="@+id/soundTxt"
+        android:layout_toEndOf="@+id/soundTxt"
+        android:visibility="visible" />
 
 
 </RelativeLayout>

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,6 +15,7 @@ import android.widget.LinearLayout;
 import com.bbp.crashtower.R;
 import com.bbp.crashtower.adapter.MypageAdapter;
 import com.bbp.crashtower.model.Card;
+import com.bbp.crashtower.result.SingleResult;
 
 import java.util.ArrayList;
 
@@ -144,6 +144,8 @@ public class MypageActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.btn_mypage_deck4:
                 choice = 3;
+                Intent i=new Intent(getApplicationContext(), SingleResult.class);
+                startActivity(i);
                 break;
             default:
                 return;
